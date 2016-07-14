@@ -1,0 +1,24 @@
+package com.dwg.weibo.api;
+
+import com.dwg.weibo.mvp.model.IStatusService;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+/**
+ * Created by Administrator on 2016/7/10.
+ */
+
+public class ApiService {
+    public static final String baseUrl = "https://api.weibo.com";
+    private static Retrofit retrofit;
+    public static IStatusService createStatusService(){return retrofit().create(IStatusService.class);}
+    public static Retrofit retrofit(){
+        if(retrofit==null){
+            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl(baseUrl)
+                    .build();
+        }
+        return retrofit;
+    }
+}

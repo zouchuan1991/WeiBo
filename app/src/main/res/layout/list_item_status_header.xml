@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:padding="@dimen/padding_3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/profile_img"
+            android:layout_width="@dimen/width_38dp"
+            android:layout_height="@dimen/height_38dp"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:roundAsCircle="true"/>
+    </FrameLayout>
+    <RelativeLayout
+        android:padding="@dimen/padding_5dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="红楼"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14sp" />
+        <ImageView
+            android:layout_toRightOf="@+id/profile_name"
+            android:src="@drawable/tabbar_compose_icon_add"
+            android:id="@+id/profile_verified"
+            android:layout_width="@dimen/width_18dp"
+            android:layout_height="@dimen/height_18dp"
+            android:layout_gravity="bottom|right"
+            />
+        <TextView
+            android:id="@+id/profile_time"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:layout_below="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="16分钟前       "
+            android:textColor="@color/list_item_status_header_profile_time_color"
+            android:textSize="@dimen/text_size_12sp" />
+        <TextView
+            android:id="@+id/weiboComeFrom"
+            android:layout_toRightOf="@+id/profile_time"
+            android:layout_alignBottom="@+id/profile_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="来自 微博weibo.com"
+            android:textColor="@color/list_item_status_header_profile_time_color"
+            android:textSize="@dimen/text_size_12sp" />
+        <ImageView
+            android:id="@+id/popover_arrow"
+            android:layout_width="@dimen/width_38dp"
+            android:layout_height="@dimen/width_38dp"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/padding_15dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/timeline_icon_more" />
+    </RelativeLayout>
+</LinearLayout>

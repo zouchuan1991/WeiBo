@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/retweet_background_color">
+    <include layout="@layout/list_item_status_header"/>
+    <TextView
+        android:id="@+id/origin_context"
+        android:padding="@dimen/padding_8dp"
+        android:text="确实像是笔记本电池，两个凸起是防滑垫脚？//@喝七喜的LBJ: 一个笔记本电脑电池都能把人吓成这样~ //@张晨初艺术空间: [吃惊] //@六安自媒体: 求证 //@郭晏平: 首都机场？[吃惊]"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/retweetStatus_layout"
+        android:background="@color/grey"
+        android:padding="@dimen/padding_8dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/retweet_content"
+            android:text="确实像是笔记本电池，两个凸起是防滑垫脚？//@喝七喜的LBJ: 一个笔记本电脑电池都能把人吓成这样~ //@张晨初艺术空间: [吃惊] //@六安自媒体: 求证 //@郭晏平: 首都机场？[吃惊]"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/weibo_images"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <include layout="@layout/list_item_status_footer"/>
+</LinearLayout>
