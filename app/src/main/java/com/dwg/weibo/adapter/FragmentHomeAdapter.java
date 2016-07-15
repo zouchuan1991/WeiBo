@@ -49,39 +49,43 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mView = LayoutInflater.from(mContext).inflate(R.layout.list_item_retweet_status, parent, false);
             return new RetweetViewHolder(mView);
         }
-
         return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Status status = mDatas.get(position);
-        if (holder instanceof OriginViewHolder) {
-            FillContent.fillTitle(mContext, status, ((OriginViewHolder) holder).profile_img, ((OriginViewHolder) holder).profile_verified, ((OriginViewHolder) holder).profile_name, ((OriginViewHolder) holder).profile_time, ((OriginViewHolder) holder).weiboComeFrom);
-            FillContent.fillWeiBoContent(mContext, ((OriginViewHolder) holder).weibo_content, status.text);
-            FillContent.fillButtonBar(mContext, status, ((OriginViewHolder) holder).text_comment, ((OriginViewHolder) holder).text_transmit, ((OriginViewHolder) holder).text_favour);
-            FillContent.fillWeiBoImgList(mContext, status, ((OriginViewHolder) holder).weibo_images);
-        }else if(holder instanceof RetweetViewHolder){
-            FillContent.fillTitle(mContext,status,((RetweetViewHolder) holder).profileImg,((RetweetViewHolder) holder).profileVerified,((RetweetViewHolder) holder).profileName,((RetweetViewHolder) holder).profileTime,((RetweetViewHolder) holder).weiboComeFrom);
-            FillContent.fillRetweetContent(mContext,status,((RetweetViewHolder) holder).retweetContent);
-            FillContent.fillWeiBoContent(mContext,((RetweetViewHolder) holder).originContext,status.text);
-            FillContent.fillButtonBar(mContext,status,((RetweetViewHolder) holder).textComment,((RetweetViewHolder) holder).textTransmit,((RetweetViewHolder) holder).textFavour);
-            FillContent.fillWeiBoImgList(mContext,mDatas.get(position).retweeted_status,((RetweetViewHolder) holder).weiboImages);
+        if (position != mDatas.size()) {
+            Status status = mDatas.get(position);
+            if (holder instanceof OriginViewHolder) {
+                FillContent.fillTitle(mContext, status, ((OriginViewHolder) holder).profile_img, ((OriginViewHolder) holder).profile_verified, ((OriginViewHolder) holder).profile_name, ((OriginViewHolder) holder).profile_time, ((OriginViewHolder) holder).weiboComeFrom);
+                FillContent.fillWeiBoContent(mContext, ((OriginViewHolder) holder).weibo_content, status.text);
+                FillContent.fillButtonBar(mContext, status, ((OriginViewHolder) holder).text_comment, ((OriginViewHolder) holder).text_transmit, ((OriginViewHolder) holder).text_favour);
+                FillContent.fillWeiBoImgList(mContext, status, ((OriginViewHolder) holder).weibo_images);
+            } else if (holder instanceof RetweetViewHolder) {
+                FillContent.fillTitle(mContext, status, ((RetweetViewHolder) holder).profileImg, ((RetweetViewHolder) holder).profileVerified, ((RetweetViewHolder) holder).profileName, ((RetweetViewHolder) holder).profileTime, ((RetweetViewHolder) holder).weiboComeFrom);
+                FillContent.fillRetweetContent(mContext, status, ((RetweetViewHolder) holder).retweetContent);
+                FillContent.fillWeiBoContent(mContext, ((RetweetViewHolder) holder).originContext, status.text);
+                FillContent.fillButtonBar(mContext, status, ((RetweetViewHolder) holder).textComment, ((RetweetViewHolder) holder).textTransmit, ((RetweetViewHolder) holder).textFavour);
+                FillContent.fillWeiBoImgList(mContext, mDatas.get(position).retweeted_status, ((RetweetViewHolder) holder).weiboImages);
+            }
+
         }
     }
 
 
     @Override
     public int getItemCount() {
-        if (mDatas != null) {
-            return mDatas.size();
-        } else {
+        if (mDatas.size() == 0) {
             return 0;
+        } else {
+            return mDatas.size();
         }
+
     }
 
     @Override
     public int getItemViewType(int position) {
+
         if (mDatas.get(position).retweeted_status != null) {
             return TYPE_RETWEET_ITEM;
         } else {
@@ -166,4 +170,5 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ButterKnife.bind(this,itemView);
         }
     }
+
 }

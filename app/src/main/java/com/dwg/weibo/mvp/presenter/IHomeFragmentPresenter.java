@@ -7,5 +7,7 @@ import android.content.Context;
  */
 
 public interface IHomeFragmentPresenter {
-    public void firstLoadDatas(Context context);
+    void firstLoadDatas(Context context);
+
+    void requestMoreData(Context context);
 }

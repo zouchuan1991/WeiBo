@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_60dp">
+
+    <include
+        android:id="@+id/loading"
+        android:visibility="gone"
+        layout="@layout/footerview_loading" />
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/network"
+        layout="@layout/footerview_network_error" />
+
+    <include
+        android:id="@+id/end"
+        android:visibility="gone"
+        layout="@layout/footerview_end" />
+
+</LinearLayout>

@@ -9,6 +9,19 @@ import java.util.ArrayList;
  */
 
 public interface IHomeFragmentView {
+    void hideFooter();
 
-    public void UpdateListView(ArrayList<Status> statuses);
+    void showLoadFooterView();
+
+    void updateListView(ArrayList<Status> statuses);
+
+    void scrollToTop();
+
+    void hideLoadingIcon();
+
+    void showRecyclerView();
+
+    void hideRecyclerView();
+
+    void showEndFooterView();
 }
