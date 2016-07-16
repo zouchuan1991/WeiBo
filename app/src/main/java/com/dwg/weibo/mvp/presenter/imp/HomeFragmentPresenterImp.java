@@ -2,7 +2,6 @@ package com.dwg.weibo.mvp.presenter.imp;
 
 import android.content.Context;
 import android.widget.Toast;
-
 import com.dwg.weibo.api.ApiService;
 import com.dwg.weibo.entity.FriendsTimelineRrequest;
 import com.dwg.weibo.entity.Status;
@@ -11,9 +10,7 @@ import com.dwg.weibo.mvp.model.IStatusService;
 import com.dwg.weibo.mvp.presenter.IHomeFragmentPresenter;
 import com.dwg.weibo.mvp.view.IHomeFragmentView;
 import com.dwg.weibo.utils.ToastUtils;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +20,7 @@ import retrofit2.Response;
  */
 
 public class HomeFragmentPresenterImp implements IHomeFragmentPresenter {
-    final String accessToken = "2.00aHpcvBA3pYSD077de44c7c0P8cqu";
+    final String accessToken = "";
     private IHomeFragmentView mHomeFragmentView;
     private ArrayList<Status> mStatus = new ArrayList<>();
     private Context mContext;

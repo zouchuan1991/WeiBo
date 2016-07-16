@@ -5,7 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
+import butterknife.BindView;
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.FragmentHomeAdapter;
 import com.dwg.weibo.adapter.HeaderAndFooterRecyclerAdapter;
@@ -17,10 +17,7 @@ import com.dwg.weibo.ui.common.FillContentHelper;
 import com.dwg.weibo.ui.common.LoadingFooter;
 import com.dwg.weibo.widget.EndlessRecyclerOnScrollListener;
 import com.dwg.weibo.widget.RecyclerViewStateUtils;
-
 import java.util.ArrayList;
-
-import butterknife.BindView;
 
 /**
  * Created by Administrator on 2016/7/10.
@@ -52,15 +49,16 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         });
     }
 
-
+    LinearLayoutManager linearLayoutManager;
     private void initRecyclerView() {
         mDatas = new ArrayList<>();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mAdapter = new FragmentHomeAdapter(mContext,mDatas);
+        mAdapter = new FragmentHomeAdapter(mContext, mDatas);
         mHeaderAndFooterRecyclerAdapter = new HeaderAndFooterRecyclerAdapter(mAdapter);
+        linearLayoutManager =
+            new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mHeaderAndFooterRecyclerAdapter);
-        mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
+
         //以后可能增加设置setHeader
 
     }
@@ -73,6 +71,8 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
 
     @Override
     public void updateListView(ArrayList<Status> statuses) {
+        int position = mHeaderAndFooterRecyclerAdapter.getItemCount();
+        mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
         for(Status status:statuses){
             FillContentHelper.setImgUrl(status);
             if(status.retweeted_status!=null){
@@ -83,8 +83,9 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         }
         mDatas = statuses;
         mAdapter.setDatas(statuses);
-        mHeaderAndFooterRecyclerAdapter.notifyDataSetChanged();
-        hideFooter();
+
+        mRecyclerView.getLayoutManager().scrollToPosition(position);
+
     }
 
     @Override
