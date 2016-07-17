@@ -6,7 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
-import com.dwg.weibo.ui.common.LoadingFooter;
+import com.dwg.weibo.ui.common.LoadingFooterView;
+import com.dwg.weibo.utils.RecyclerViewStateUtils;
 
 public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener implements OnListLoadNextPageListener {
 
@@ -75,8 +76,9 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
         int visibleItemCount = layoutManager.getChildCount();
         int totalItemCount = layoutManager.getItemCount();
         if (visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE && (lastVisibleItemPosition) >= totalItemCount - 1) {
-            LoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(recyclerView);
-            if (state == LoadingFooter.State.Loading || state == LoadingFooter.State.TheEnd) {
+            LoadingFooterView.State state = RecyclerViewStateUtils.getFooterViewState(recyclerView);
+            if (state == LoadingFooterView.State.Loading
+                || state == LoadingFooterView.State.TheEnd) {
                 return;
             }
             onLoadNextPage(recyclerView);

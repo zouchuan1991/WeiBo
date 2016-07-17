@@ -4,20 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.ImageAdapter;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.entity.User;
 import com.dwg.weibo.utils.DateUtils;
 import com.dwg.weibo.utils.TimeUtils;
-import com.dwg.weibo.utils.ToastUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,17 +25,17 @@ public class FillContent {
     public static void fillTitle(Context context, Status status, SimpleDraweeView profile_img, ImageView profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom) {
         fillProfileImg(context,status.user,profile_img,profile_verified);
         setWeiBoName(profile_name, status.user);
-        setWeiBoTime(context, profile_time, status);
-        setWeiBoComeFrom(weibo_comefrom, status);
+        setWeiBoTime(context, profile_time, status.created_at);
+        setWeiBoComeFrom(weibo_comefrom, status.source);
     }
 
-    private static void setWeiBoComeFrom(TextView weibo_comefrom, Status status) {
-            FillContentHelper.setSource(status);//正则表达处理
-            weibo_comefrom.setText("来自    " + status.source);
+    public static void setWeiBoComeFrom(TextView weibo_comefrom, String source) {
+        FillContentHelper.setSource(source);//正则表达处理
+        weibo_comefrom.setText("来自    " + source);
     }
 
-    private static void setWeiBoTime(Context context, TextView profile_time, Status status) {
-        Date data = DateUtils.parseDate(status.created_at,DateUtils.WeiBo_ITEM_DATE_FORMAT);
+    public static void setWeiBoTime(Context context, TextView profile_time, String created_at) {
+        Date data = DateUtils.parseDate(created_at, DateUtils.WeiBo_ITEM_DATE_FORMAT);
         TimeUtils timeUtils = TimeUtils.instance(context);
         profile_time.setText(timeUtils.buildTimeString(data.getTime())+"    ");
 
@@ -131,8 +127,6 @@ public class FillContent {
         }
         return gridLayoutManager;
     }
-
-
 
     public static void fillRetweetContent(Context mContext, Status status, TextView retweetContent) {
         if (status.retweeted_status.user != null){

@@ -8,16 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.ui.common.FillContent;
 import com.facebook.drawee.view.SimpleDraweeView;
-
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/7/11.
@@ -112,8 +109,8 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         RecyclerView weibo_images;
         @BindView(R.id.linear_favour)
         LinearLayout linear_favour;
-        @BindView(R.id.relative_comment)
-        LinearLayout relative_comment;
+        @BindView(R.id.linear_comment)
+        LinearLayout linear_comment;
         @BindView(R.id.linear_transmit)
         LinearLayout linear_transmit;
         @BindView(R.id.text_comment)

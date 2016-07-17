@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/text_favour"
-                android:text="321"
+                android:text="232"
                 android:paddingLeft="@dimen/padding_8dp"
                 android:layout_gravity="bottom"
                 android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/relative_comment"
+            android:id="@+id/linear_comment"
             android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/padding_8dp"
             android:paddingBottom="@dimen/padding_8dp"
@@ -51,7 +51,7 @@
 
         <LinearLayout
             android:id="@+id/linear_transmit"
-            android:layout_toLeftOf="@+id/relative_comment"
+            android:layout_toLeftOf="@+id/linear_comment"
             android:paddingLeft="@dimen/padding_8dp"
             android:paddingBottom="@dimen/padding_8dp"
             android:layout_width="wrap_content"

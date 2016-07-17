@@ -14,9 +14,9 @@ import com.dwg.weibo.mvp.presenter.IHomeFragmentPresenter;
 import com.dwg.weibo.mvp.presenter.imp.HomeFragmentPresenterImp;
 import com.dwg.weibo.mvp.view.IHomeFragmentView;
 import com.dwg.weibo.ui.common.FillContentHelper;
-import com.dwg.weibo.ui.common.LoadingFooter;
+import com.dwg.weibo.ui.common.LoadingFooterView;
+import com.dwg.weibo.utils.RecyclerViewStateUtils;
 import com.dwg.weibo.widget.EndlessRecyclerOnScrollListener;
-import com.dwg.weibo.widget.RecyclerViewStateUtils;
 import java.util.ArrayList;
 
 /**
@@ -110,17 +110,20 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
 
     @Override
     public void showEndFooterView() {
-        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(), LoadingFooter.State.TheEnd, null);
+        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(),
+            LoadingFooterView.State.TheEnd, null);
     }
 
     @Override
     public void hideFooter() {
-        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(), LoadingFooter.State.Normal, null);
+        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(),
+            LoadingFooterView.State.Normal, null);
     }
 
     @Override
     public void showLoadFooterView() {
-        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(), LoadingFooter.State.Loading, null);
+        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(),
+            LoadingFooterView.State.Loading, null);
     }
 
     private EndlessRecyclerOnScrollListener endlessRecyclerOnScrollListener = new EndlessRecyclerOnScrollListener() {

@@ -6,14 +6,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.dwg.weibo.R;
 
 /**
  * Created by Administrator on 2016/7/14.
  */
 
-public class LoadingFooter extends RelativeLayout {
+public class LoadingFooterView extends RelativeLayout {
 
     protected State mState = State.Normal;
     private View mLoadingView;
@@ -22,17 +21,17 @@ public class LoadingFooter extends RelativeLayout {
     private ProgressBar mLoadingProgress;
     private TextView mLoadingText;
 
-    public LoadingFooter(Context context) {
+    public LoadingFooterView(Context context) {
         super(context);
         init(context);
     }
 
-    public LoadingFooter(Context context, AttributeSet attrs) {
+    public LoadingFooterView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public LoadingFooter(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LoadingFooterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

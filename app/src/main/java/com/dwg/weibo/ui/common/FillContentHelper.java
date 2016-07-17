@@ -1,9 +1,7 @@
 package com.dwg.weibo.ui.common;
 
 import android.text.TextUtils;
-
 import com.dwg.weibo.entity.Status;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,22 +27,22 @@ public class FillContentHelper {
 
     }
 
-    public static void setSource(Status status) {
+    public static void setSource(String source) {
         //如果字段是空的，就没必要在接着下去了。服务器确实有时候会返回空
-        if (TextUtils.isEmpty(status.source)) {
+        if (TextUtils.isEmpty(source)) {
             return;
         }
         //如果已经提取过关键字，就不需要再处理
-        if (!status.source.contains("</a>")) {
+        if (!source.contains("</a>")) {
             return;
         }
 
         Pattern mpattern = Pattern.compile("<(.*?)>(.*?)</a>");
-        Matcher mmatcher = mpattern.matcher(status.source);
+        Matcher mmatcher = mpattern.matcher(source);
 
         if (mmatcher.find()) {
             String weibocomefrom = mmatcher.group(2);
-            status.source = weibocomefrom;
+            source = weibocomefrom;
         }
     }
 }
