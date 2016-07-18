@@ -20,7 +20,7 @@ import retrofit2.Response;
  */
 
 public class HomeFragmentPresenterImp implements IHomeFragmentPresenter {
-    final String accessToken = "2.00aHpcvBA3pYSD077de44c7c0P8cqu";
+    public static final String accessToken = "2.00aHpcvBA3pYSD077de44c7c0P8cqu";
     private IHomeFragmentView mHomeFragmentView;
     private ArrayList<Status> mStatus = new ArrayList<>();
     private Context mContext;

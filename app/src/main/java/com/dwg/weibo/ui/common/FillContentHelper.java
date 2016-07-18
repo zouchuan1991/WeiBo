@@ -27,14 +27,14 @@ public class FillContentHelper {
 
     }
 
-    public static void setSource(String source) {
+    public static String setSource(String source) {
         //如果字段是空的，就没必要在接着下去了。服务器确实有时候会返回空
         if (TextUtils.isEmpty(source)) {
-            return;
+            return null;
         }
         //如果已经提取过关键字，就不需要再处理
         if (!source.contains("</a>")) {
-            return;
+            return null;
         }
 
         Pattern mpattern = Pattern.compile("<(.*?)>(.*?)</a>");
@@ -42,7 +42,9 @@ public class FillContentHelper {
 
         if (mmatcher.find()) {
             String weibocomefrom = mmatcher.group(2);
-            source = weibocomefrom;
+            return source = weibocomefrom;
+        } else {
+            return null;
         }
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/origin_status_layout"
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_width="match_parent"
@@ -21,5 +22,7 @@
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
-    <include layout="@layout/list_item_status_footer"/>
+    <include
+        android:id="@+id/status_bottom_bar"
+        layout="@layout/list_item_status_footer"/>
 </LinearLayout>

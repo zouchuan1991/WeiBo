@@ -132,6 +132,7 @@
         <dimen name="listPreferredItemHeightSmall">48dp</dimen>
         <dimen name="width_38dp">38dp</dimen>
         <dimen name="height_38dp">38dp</dimen>
+        <dimen name="padding_12dp">12dp</dimen>
 
 
     </resources>

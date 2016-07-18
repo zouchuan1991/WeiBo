@@ -30,8 +30,8 @@ public class FillContent {
     }
 
     public static void setWeiBoComeFrom(TextView weibo_comefrom, String source) {
-        FillContentHelper.setSource(source);//正则表达处理
-        weibo_comefrom.setText("来自    " + source);
+        //正则表达处理
+        weibo_comefrom.setText("来自    " + FillContentHelper.setSource(source));
     }
 
     public static void setWeiBoTime(Context context, TextView profile_time, String created_at) {
@@ -82,6 +82,21 @@ public class FillContent {
             favour.setText(status.attitudes_count + "");
         } else {
             favour.setText("赞");
+        }
+    }
+
+    public static void fillFloatBar(final Context context, final Status status, TextView comment,
+        TextView transmit, TextView favour) {
+        if (status.comments_count != 0) {
+            comment.setText(status.comments_count + "  评论");
+        }
+
+        if (status.reposts_count != 0) {
+            transmit.setText(status.reposts_count + "  转发");
+        }
+
+        if (status.attitudes_count != 0) {
+            favour.setText(status.attitudes_count + "  赞");
         }
 
     }

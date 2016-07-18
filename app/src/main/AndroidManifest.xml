@@ -36,6 +36,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize" >
 
         </activity>
+        <activity android:name=".ui.activity.OriginStatusDetailActivity"/>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.dwg.weibo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.Status;
+import com.dwg.weibo.ui.activity.OriginStatusDetailActivity;
 import com.dwg.weibo.ui.common.FillContent;
 import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
@@ -50,7 +52,7 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (position != mDatas.size()) {
             Status status = mDatas.get(position);
             if (holder instanceof OriginViewHolder) {
@@ -58,6 +60,14 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 FillContent.fillWeiBoContent(mContext, ((OriginViewHolder) holder).weibo_content, status.text);
                 FillContent.fillButtonBar(mContext, status, ((OriginViewHolder) holder).text_comment, ((OriginViewHolder) holder).text_transmit, ((OriginViewHolder) holder).text_favour);
                 FillContent.fillWeiBoImgList(mContext, status, ((OriginViewHolder) holder).weibo_images);
+                ((OriginViewHolder) holder).origin_status_layout.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override public void onClick(View v) {
+                            Intent i = new Intent(mContext, OriginStatusDetailActivity.class);
+                            i.putExtra("status", mDatas.get(position));
+                            mContext.startActivity(i);
+                        }
+                    });
             } else if (holder instanceof RetweetViewHolder) {
                 FillContent.fillTitle(mContext, status, ((RetweetViewHolder) holder).profileImg, ((RetweetViewHolder) holder).profileVerified, ((RetweetViewHolder) holder).profileName, ((RetweetViewHolder) holder).profileTime, ((RetweetViewHolder) holder).weiboComeFrom);
                 FillContent.fillRetweetContent(mContext, status, ((RetweetViewHolder) holder).retweetContent);
@@ -119,7 +129,8 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView text_favour;
         @BindView(R.id.text_transmit)
         TextView text_transmit;
-
+        @BindView(R.id.origin_status_layout)
+        LinearLayout origin_status_layout;
         public OriginViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -155,13 +166,14 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         LinearLayout linearFavour;
         @BindView(R.id.text_comment)
         TextView textComment;
-        @BindView(R.id.relative_comment)
+        @BindView(R.id.linear_comment)
         LinearLayout relativeComment;
         @BindView(R.id.text_transmit)
         TextView textTransmit;
         @BindView(R.id.linear_transmit)
         LinearLayout linearTransmit;
-
+        @BindView(R.id.retweet_status_layout)
+        LinearLayout retweet_status_layout;
         public RetweetViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

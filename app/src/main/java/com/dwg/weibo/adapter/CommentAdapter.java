@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.Comment;
 import com.dwg.weibo.entity.User;
@@ -28,6 +29,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     this.mDatas = datas;
   }
 
+  public void setDatas(ArrayList<Comment> comments) {
+    this.mDatas = comments;
+  }
   @Override
   public CommentAdapter.CommentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     mView = LayoutInflater.from(mContext).inflate(R.layout.list_item_comment, parent, false);
@@ -63,6 +67,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     public CommentViewHolder(View itemView) {
       super(itemView);
+      ButterKnife.bind(this, itemView);
     }
   }
 }

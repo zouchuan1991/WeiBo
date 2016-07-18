@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.entity.User;
@@ -63,6 +64,7 @@ public class TransmitAdapter extends RecyclerView.Adapter<TransmitAdapter.Transm
 
     public TransmitViewHolder(View itemView) {
       super(itemView);
+      ButterKnife.bind(this, itemView);
     }
   }
 }
