@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import butterknife.BindView;
@@ -17,6 +18,7 @@ import com.dwg.weibo.mvp.presenter.imp.StatusDetailPresenterImp;
 import com.dwg.weibo.mvp.view.IBaseActivityView;
 import com.dwg.weibo.ui.common.LoadingFooterView;
 import com.dwg.weibo.utils.RecyclerViewStateUtils;
+import com.dwg.weibo.utils.ToastUtils;
 import com.dwg.weibo.widget.EndlessRecyclerOnScrollListener;
 import java.util.ArrayList;
 
@@ -62,7 +64,7 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
     mCommentRecyclerAdapter = new HeaderAndFooterRecyclerAdapter(mCommentAdapter);
     mRecyclerView.setAdapter(mCommentRecyclerAdapter);
     addHeaderView(mType);
-    mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
+
   }
 
   protected abstract void addHeaderView(int type);
@@ -80,26 +82,45 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
   }
 
   @Override public void updateCommentList(ArrayList<Comment> comments) {
+
+    int position = mCommentRecyclerAdapter.getItemCount() - 1;
+    mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
+    Log.e("CommentPosition", "" + position);
+
     this.mComments = comments;
     mCommentAdapter.setDatas(comments);
     mCommentRecyclerAdapter.notifyDataSetChanged();
+
+    mRecyclerView.getLayoutManager().scrollToPosition(position);
   }
 
   @Override
   public void showLoadFooterView(int currentGroup) {
+    Log.e("addFooter0", "addFooter0");
     RecyclerViewStateUtils.setFooterViewState(BaseDetailActivity.this, mRecyclerView,
         mCommentAdapter.getItemCount(), LoadingFooterView.State.Loading, null);
+  }
+
+  @Override public void hideLoadFooterView() {
+    RecyclerViewStateUtils.setFooterViewState(mRecyclerView, LoadingFooterView.State.Normal);
   }
 
   private EndlessRecyclerOnScrollListener endlessRecyclerOnScrollListener =
       new EndlessRecyclerOnScrollListener() {
         @Override
         public void onLoadNextPage(View view) {
+          Log.e("bottom", "bottom");
+          ToastUtils.showToast(mContext, "到底部了");
           super.onLoadNextPage(view);
           if (mComments != null && mComments.size() > 0) {
-            mStatusDetailPresenter.requestMoreComment(mContext);
             showLoadFooterView(1);
+            mStatusDetailPresenter.requestMoreComment(mContext);
+
           }
         }
       };
+
+  @Override public void ScrollToTop() {
+    //mRecyclerView.getLayoutManager().scrollToPosition(0);
+  }
 }

@@ -58,7 +58,6 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
             new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mHeaderAndFooterRecyclerAdapter);
-
         //以后可能增加设置setHeader
 
     }
@@ -83,7 +82,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         }
         mDatas = statuses;
         mAdapter.setDatas(statuses);
-
+        mHeaderAndFooterRecyclerAdapter.notifyDataSetChanged();
         mRecyclerView.getLayoutManager().scrollToPosition(position);
 
     }

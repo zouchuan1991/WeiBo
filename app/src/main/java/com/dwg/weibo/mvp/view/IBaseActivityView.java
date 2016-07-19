@@ -10,4 +10,8 @@ public interface IBaseActivityView {
   void updateCommentList(ArrayList<Comment> comments);
 
   void showLoadFooterView(int currentGroup);
+
+  void hideLoadFooterView();
+
+  void ScrollToTop();
 }

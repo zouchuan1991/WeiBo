@@ -1,9 +1,9 @@
 package com.dwg.weibo.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
 
 /**
@@ -34,9 +34,10 @@ public class HeaderAndFooterRecyclerAdapter extends RecyclerView.Adapter<Recycle
         int headerViewsCount = getHeaderViewsCount();
         if (position < headerViewsCount) {
             return TYPE_HEADER_VIEW;
-        } else if (headerViewsCount <= position && position < innerCount) {
+        } else if (headerViewsCount <= position && position < headerViewsCount + innerCount) {
             return mInnerAdapter.getItemViewType(position - headerViewsCount);
         } else {
+            Log.e("position", "" + position);
             return TYPE_FOOTER_VIEW;
         }
     }
@@ -45,8 +46,10 @@ public class HeaderAndFooterRecyclerAdapter extends RecyclerView.Adapter<Recycle
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEADER_VIEW:
+
                 return new ViewHolder(mHeaderViews.get(0));
             case TYPE_FOOTER_VIEW:
+                Log.e("footerViewCount", mFooterViews.size() + "");
                 return new ViewHolder(mFooterViews.get(0));
             default:
                 return mInnerAdapter.onCreateViewHolder(parent, viewType);

@@ -2,6 +2,7 @@ package com.dwg.weibo.utils;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import com.dwg.weibo.adapter.HeaderAndFooterRecyclerAdapter;
 import com.dwg.weibo.ui.common.LoadingFooterView;
@@ -19,6 +20,8 @@ public class RecyclerViewStateUtils {
      */
     public static void setFooterViewState(Activity instance, RecyclerView recyclerView,
         int pageSize, LoadingFooterView.State state, View.OnClickListener errorListener) {
+
+        Log.e("addFooter1", "addFooter");
 
         if (instance == null || instance.isFinishing()) {
             return;
@@ -49,6 +52,7 @@ public class RecyclerViewStateUtils {
             }
             recyclerView.scrollToPosition(headerAndFooterAdapter.getItemCount() - 1);
         } else {
+            Log.e("addFooter2", "addFooter");
             footerView = new LoadingFooterView(instance);
             footerView.setState(state);
 
