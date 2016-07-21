@@ -109,7 +109,7 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
 
     @Override public void onDataFinish(ArrayList<Comment> commentlist) {
       Log.e("data加载完毕", "完毕");
-      mBaseDetailActivity.updateCommentList(commentlist);
+      mBaseDetailActivity.updateCommentList(commentlist, true);
     }
 
     @Override public void onError(String error) {
@@ -124,7 +124,7 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
 
     @Override public void onDataFinish(ArrayList<Comment> commentlist) {
       mBaseDetailActivity.hideLoadFooterView();
-      mBaseDetailActivity.updateCommentList(commentlist);
+      mBaseDetailActivity.updateCommentList(commentlist, false);
     }
 
     @Override public void onError(String error) {

@@ -18,7 +18,6 @@ import com.dwg.weibo.mvp.presenter.imp.StatusDetailPresenterImp;
 import com.dwg.weibo.mvp.view.IBaseActivityView;
 import com.dwg.weibo.ui.common.LoadingFooterView;
 import com.dwg.weibo.utils.RecyclerViewStateUtils;
-import com.dwg.weibo.utils.ToastUtils;
 import com.dwg.weibo.widget.EndlessRecyclerOnScrollListener;
 import java.util.ArrayList;
 
@@ -81,40 +80,42 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
     return R.layout.activity_status_detail;
   }
 
-  @Override public void updateCommentList(ArrayList<Comment> comments) {
+  @Override public void updateCommentList(ArrayList<Comment> comments, boolean firstLoad) {
 
-    int position = mCommentRecyclerAdapter.getItemCount() - 1;
+    int position = mCommentRecyclerAdapter.getItemCount();
     mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
     Log.e("CommentPosition", "" + position);
 
     this.mComments = comments;
     mCommentAdapter.setDatas(comments);
     mCommentRecyclerAdapter.notifyDataSetChanged();
+    if (firstLoad == false) {
+      mRecyclerView.getLayoutManager().scrollToPosition(position);
+    }
 
-    mRecyclerView.getLayoutManager().scrollToPosition(position);
   }
 
   @Override
   public void showLoadFooterView(int currentGroup) {
     Log.e("addFooter0", "addFooter0");
     RecyclerViewStateUtils.setFooterViewState(BaseDetailActivity.this, mRecyclerView,
-        mCommentAdapter.getItemCount(), LoadingFooterView.State.Loading, null);
+        mComments.size(), LoadingFooterView.State.Loading, null);
   }
 
   @Override public void hideLoadFooterView() {
-    RecyclerViewStateUtils.setFooterViewState(mRecyclerView, LoadingFooterView.State.Normal);
+    RecyclerViewStateUtils.setFooterViewState(BaseDetailActivity.this, mRecyclerView,
+        mComments.size(),
+        LoadingFooterView.State.Normal, null);
   }
 
   private EndlessRecyclerOnScrollListener endlessRecyclerOnScrollListener =
       new EndlessRecyclerOnScrollListener() {
         @Override
         public void onLoadNextPage(View view) {
-          Log.e("bottom", "bottom");
-          ToastUtils.showToast(mContext, "到底部了");
           super.onLoadNextPage(view);
           if (mComments != null && mComments.size() > 0) {
-            showLoadFooterView(1);
             mStatusDetailPresenter.requestMoreComment(mContext);
+            showLoadFooterView(1);
 
           }
         }

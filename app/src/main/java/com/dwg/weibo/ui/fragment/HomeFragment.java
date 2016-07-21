@@ -121,8 +121,8 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
 
     @Override
     public void showLoadFooterView() {
-        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(),
-            LoadingFooterView.State.Loading, null);
+        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView,
+            mDatas.size(), LoadingFooterView.State.Loading, null);
     }
 
     private EndlessRecyclerOnScrollListener endlessRecyclerOnScrollListener = new EndlessRecyclerOnScrollListener() {
