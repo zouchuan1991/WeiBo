@@ -31,5 +31,8 @@
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-    <include layout="@layout/list_item_status_footer"/>
+
+    <include
+        android:id="@+id/bottom"
+        layout="@layout/list_item_status_footer" />
 </LinearLayout>

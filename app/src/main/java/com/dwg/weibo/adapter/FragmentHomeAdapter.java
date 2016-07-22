@@ -9,14 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.ui.activity.OriginStatusDetailActivity;
+import com.dwg.weibo.ui.activity.RetweetStatusDetailActivity;
 import com.dwg.weibo.ui.common.FillContent;
 import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/7/11.
@@ -74,6 +78,15 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 FillContent.fillWeiBoContent(mContext, ((RetweetViewHolder) holder).originContext, status.text);
                 FillContent.fillButtonBar(mContext, status, ((RetweetViewHolder) holder).textComment, ((RetweetViewHolder) holder).textTransmit, ((RetweetViewHolder) holder).textFavour);
                 FillContent.fillWeiBoImgList(mContext, mDatas.get(position).retweeted_status, ((RetweetViewHolder) holder).weiboImages);
+                ((RetweetViewHolder) holder).retweet_status_layout.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent i = new Intent(mContext, RetweetStatusDetailActivity.class);
+                                i.putExtra("status", mDatas.get(position));
+                                mContext.startActivity(i);
+                            }
+                        });
             }
 
         }

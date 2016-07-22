@@ -5,4 +5,5 @@ package com.dwg.weibo.ui.common;
  */
 public class RequestParam {
   public static final int GET_COMMENT_COUNT = 20;
+  public static final int GET_TRANMIT_COUNT = 20;
 }

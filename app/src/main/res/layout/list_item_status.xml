@@ -23,6 +23,6 @@
 
     </android.support.v7.widget.RecyclerView>
     <include
-        android:id="@+id/status_bottom_bar"
+        android:id="@+id/bottom"
         layout="@layout/list_item_status_footer"/>
 </LinearLayout>

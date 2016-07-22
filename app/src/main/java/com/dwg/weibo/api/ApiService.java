@@ -2,6 +2,8 @@ package com.dwg.weibo.api;
 
 import com.dwg.weibo.mvp.model.ICommentService;
 import com.dwg.weibo.mvp.model.IStatusService;
+import com.dwg.weibo.mvp.model.ITransmitService;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,5 +26,9 @@ public class ApiService {
 
     public static ICommentService createCommentService() {
         return retrofit().create(ICommentService.class);
+    }
+
+    public static ITransmitService createTransmitService() {
+        return retrofit().create(ITransmitService.class);
     }
 }

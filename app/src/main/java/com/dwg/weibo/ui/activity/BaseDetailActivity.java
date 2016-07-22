@@ -7,10 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import butterknife.BindView;
+
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.CommentAdapter;
 import com.dwg.weibo.adapter.HeaderAndFooterRecyclerAdapter;
+import com.dwg.weibo.adapter.RepostAdapter;
 import com.dwg.weibo.entity.Comment;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.mvp.presenter.IStatusDetailPresenter;
@@ -19,7 +20,10 @@ import com.dwg.weibo.mvp.view.IBaseActivityView;
 import com.dwg.weibo.ui.common.LoadingFooterView;
 import com.dwg.weibo.utils.RecyclerViewStateUtils;
 import com.dwg.weibo.widget.EndlessRecyclerOnScrollListener;
+
 import java.util.ArrayList;
+
+import butterknife.BindView;
 
 /**
  * Created by Administrator on 2016/7/17.
@@ -36,12 +40,13 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
   @BindView(R.id.linear_transmit)
   LinearLayout mLineartransmit;
 
-  private IStatusDetailPresenter mStatusDetailPresenter;
+  public IStatusDetailPresenter mStatusDetailPresenter;
   private HeaderAndFooterRecyclerAdapter mTransmitRecyclerAdapter;
   private HeaderAndFooterRecyclerAdapter mCommentRecyclerAdapter;
   private ArrayList<Comment> mComments = new ArrayList<>();
-  private ArrayList<Status> mStatuses = new ArrayList<>();
+  private ArrayList<Status> mReposts = new ArrayList<>();
   private CommentAdapter mCommentAdapter;
+  private RepostAdapter mRepostAdapter;
   private Context mContext;
   public Status mStatus;
   private int mType;
@@ -49,6 +54,7 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
     mContext = this;
     mStatus = getIntent().getParcelableExtra("status");
     mCommentAdapter = new CommentAdapter(mContext, mComments);
+    mRepostAdapter = new RepostAdapter(mContext, mReposts);
     mStatusDetailPresenter = new StatusDetailPresenterImp(this, mStatus);
     mStatusDetailPresenter.pullToRefreshComment(mContext);
     initSwipeRefresh();
@@ -61,6 +67,7 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
         new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
     mRecyclerView.setLayoutManager(linearLayoutManager);
     mCommentRecyclerAdapter = new HeaderAndFooterRecyclerAdapter(mCommentAdapter);
+    mTransmitRecyclerAdapter = new HeaderAndFooterRecyclerAdapter(mRepostAdapter);
     mRecyclerView.setAdapter(mCommentRecyclerAdapter);
     addHeaderView(mType);
 
@@ -82,17 +89,37 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
 
   @Override public void updateCommentList(ArrayList<Comment> comments, boolean firstLoad) {
 
+
     int position = mCommentRecyclerAdapter.getItemCount();
+    mRecyclerView.clearOnScrollListeners();
     mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
     Log.e("CommentPosition", "" + position);
 
     this.mComments = comments;
     mCommentAdapter.setDatas(comments);
+    //mRecyclerView.setAdapter(mCommentRecyclerAdapter) ;
     mCommentRecyclerAdapter.notifyDataSetChanged();
-    if (firstLoad == false) {
+    if (!firstLoad) {
       mRecyclerView.getLayoutManager().scrollToPosition(position);
     }
 
+
+  }
+
+  @Override
+  public void updateRepostList(ArrayList<Status> reposts, boolean firstLoad) {
+
+    mRecyclerView.setAdapter(mTransmitRecyclerAdapter);
+    int position = mTransmitRecyclerAdapter.getItemCount();
+    mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
+    Log.e("CommentPosition", "" + position);
+
+    this.mReposts = reposts;
+    mRepostAdapter.setDatas(mReposts);
+    mTransmitRecyclerAdapter.notifyDataSetChanged();
+    if (!firstLoad) {
+      mRecyclerView.getLayoutManager().scrollToPosition(position);
+    }
   }
 
   @Override
@@ -116,12 +143,10 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
           if (mComments != null && mComments.size() > 0) {
             mStatusDetailPresenter.requestMoreComment(mContext);
             showLoadFooterView(1);
-
           }
         }
       };
 
   @Override public void ScrollToTop() {
-    //mRecyclerView.getLayoutManager().scrollToPosition(0);
   }
 }

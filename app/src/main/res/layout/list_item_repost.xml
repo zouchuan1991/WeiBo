@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/profile_img"
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_width="@dimen/width_50dp"
+        android:layout_height="@dimen/width_50dp" />
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_toRightOf="@+id/profile_img"
+        android:text="昵称"
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/comment_text"
+        android:layout_below="@+id/profile_name"
+        android:layout_alignLeft="@+id/profile_name"
+        android:text="转发"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/comment_time"
+        android:layout_below="@+id/comment_text"
+        android:layout_alignLeft="@+id/comment_text"
+        android:text="刚刚"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/weiboComeFrom"
+        android:layout_toRightOf="@+id/comment_time"
+        android:layout_alignBottom="@+id/comment_time"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:text="        来自"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/profile_verified"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="@dimen/margin_0dp" />
+
+</RelativeLayout>

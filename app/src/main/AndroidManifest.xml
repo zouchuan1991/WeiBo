@@ -37,6 +37,7 @@
 
         </activity>
         <activity android:name=".ui.activity.OriginStatusDetailActivity"/>
+        <activity android:name=".ui.activity.RetweetStatusDetailActivity" />
     </application>
 
 </manifest>

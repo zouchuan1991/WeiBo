@@ -7,11 +7,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.Status;
+import com.dwg.weibo.ui.activity.BaseDetailActivity;
+import com.dwg.weibo.utils.ToastUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2016/7/17.
@@ -33,15 +38,18 @@ public class OriginHeaderView extends LinearLayout {
   @BindView(R.id.text_transmit) TextView textTransmit;
   @BindView(R.id.linear_transmit) LinearLayout linearTransmit;
   @BindView(R.id.body) RelativeLayout body;
+  @BindView(R.id.origin_status_layout)
+  LinearLayout originStatusLayout;
   @BindView(R.id.commentBar_retweet) TextView commentBarRetweet;
   @BindView(R.id.retweet_indicator) ImageView retweetIndicator;
   @BindView(R.id.commentBar_comment) TextView commentBarComment;
   @BindView(R.id.comment_indicator) ImageView commentIndicator;
   @BindView(R.id.commentBar_like) TextView commentBarLike;
-  @BindView(R.id.status_bottom_bar) LinearLayout linearLayout;
+  @BindView(R.id.bottom)
+  LinearLayout linearLayout;
   private Context mContext;
-  private View mView;
   private Status mStatus;
+  private int mCurrentTab = 2;
 
   public OriginHeaderView(Context context, Status status, int Type) {
     super(context);
@@ -51,7 +59,7 @@ public class OriginHeaderView extends LinearLayout {
   }
 
   private void init() {
-    this.mView = inflate(mContext, R.layout.activity_status_detail_original, this);
+    View mView = inflate(mContext, R.layout.activity_status_detail_original, this);
     ButterKnife.bind(this, mView);
     initContent();
   }
@@ -64,5 +72,24 @@ public class OriginHeaderView extends LinearLayout {
     FillContent.fillFloatBar(mContext, mStatus, commentBarComment, commentBarRetweet,
         commentBarLike);
     FillContent.fillWeiBoImgList(mContext, mStatus, weiboImages);
+  }
+
+  @OnClick({R.id.commentBar_comment, R.id.commentBar_retweet})
+  public void floatClick(View v) {
+    ToastUtils.showToast(mContext, "点击了选项卡");
+    switch (v.getId()) {
+      case R.id.commentBar_comment:
+        if (mCurrentTab != 2) {
+          ((BaseDetailActivity) mContext).mStatusDetailPresenter.pullToRefreshComment(mContext);
+          mCurrentTab = 2;
+        }
+        break;
+      case R.id.commentBar_retweet:
+        if (mCurrentTab != 1) {
+          ((BaseDetailActivity) mContext).mStatusDetailPresenter.pullToRefreshTransmit(mContext);
+          mCurrentTab = 1;
+        }
+        break;
+    }
   }
 }
