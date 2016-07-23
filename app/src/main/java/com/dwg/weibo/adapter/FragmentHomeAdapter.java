@@ -62,7 +62,7 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (holder instanceof OriginViewHolder) {
                 FillContent.fillTitle(mContext, status, ((OriginViewHolder) holder).profile_img, ((OriginViewHolder) holder).profile_verified, ((OriginViewHolder) holder).profile_name, ((OriginViewHolder) holder).profile_time, ((OriginViewHolder) holder).weiboComeFrom);
                 FillContent.fillWeiBoContent(mContext, ((OriginViewHolder) holder).weibo_content, status.text);
-                FillContent.fillButtonBar(mContext, status, ((OriginViewHolder) holder).text_comment, ((OriginViewHolder) holder).text_transmit, ((OriginViewHolder) holder).text_favour);
+                FillContent.fillButtonBar(mContext, status, ((OriginViewHolder) holder).linear_comment, ((OriginViewHolder) holder).linear_transmit, ((OriginViewHolder) holder).linear_favour, ((OriginViewHolder) holder).text_comment, ((OriginViewHolder) holder).text_transmit, ((OriginViewHolder) holder).text_favour);
                 FillContent.fillWeiBoImgList(mContext, status, ((OriginViewHolder) holder).weibo_images);
                 ((OriginViewHolder) holder).origin_status_layout.setOnClickListener(
                     new View.OnClickListener() {
@@ -76,7 +76,7 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 FillContent.fillTitle(mContext, status, ((RetweetViewHolder) holder).profileImg, ((RetweetViewHolder) holder).profileVerified, ((RetweetViewHolder) holder).profileName, ((RetweetViewHolder) holder).profileTime, ((RetweetViewHolder) holder).weiboComeFrom);
                 FillContent.fillRetweetContent(mContext, status, ((RetweetViewHolder) holder).retweetContent);
                 FillContent.fillWeiBoContent(mContext, ((RetweetViewHolder) holder).originContext, status.text);
-                FillContent.fillButtonBar(mContext, status, ((RetweetViewHolder) holder).textComment, ((RetweetViewHolder) holder).textTransmit, ((RetweetViewHolder) holder).textFavour);
+                FillContent.fillButtonBar(mContext, status, ((RetweetViewHolder) holder).linear_comment, ((RetweetViewHolder) holder).linearTransmit, ((RetweetViewHolder) holder).linearFavour, ((RetweetViewHolder) holder).textComment, ((RetweetViewHolder) holder).textTransmit, ((RetweetViewHolder) holder).textFavour);
                 FillContent.fillWeiBoImgList(mContext, mDatas.get(position).retweeted_status, ((RetweetViewHolder) holder).weiboImages);
                 ((RetweetViewHolder) holder).retweet_status_layout.setOnClickListener(
                         new View.OnClickListener() {
@@ -180,7 +180,7 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @BindView(R.id.text_comment)
         TextView textComment;
         @BindView(R.id.linear_comment)
-        LinearLayout relativeComment;
+        LinearLayout linear_comment;
         @BindView(R.id.text_transmit)
         TextView textTransmit;
         @BindView(R.id.linear_transmit)

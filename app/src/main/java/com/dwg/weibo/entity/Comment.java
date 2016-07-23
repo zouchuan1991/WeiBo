@@ -2,6 +2,7 @@ package com.dwg.weibo.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,19 +53,19 @@ public class Comment implements Parcelable {
   //            return null;
   //        }
   //
-  //        Comment comment = new Comment();
-  //        comment.created_at = jsonObject.optString("created_at");
-  //        comment.id = jsonObject.optString("id");
-  //        comment.text = jsonObject.optString("text");
-  //        comment.source = jsonObject.optString("source");
-  //        comment.source = getSource(jsonObject.optString("source"));
-  //        comment.user = User.parse(jsonObject.optJSONObject("user"));
-  //        comment.mid = jsonObject.optString("mid");
-  //        comment.idstr = jsonObject.optString("idstr");
-  //        comment.status = Status.parse(jsonObject.optJSONObject("status"));
-  //        comment.reply_comment = Comment.parse(jsonObject.optJSONObject("reply_comment"));
+  //        Comment activity_handle = new Comment();
+  //        activity_handle.created_at = jsonObject.optString("created_at");
+  //        activity_handle.id = jsonObject.optString("id");
+  //        activity_handle.text = jsonObject.optString("text");
+  //        activity_handle.source = jsonObject.optString("source");
+  //        activity_handle.source = getSource(jsonObject.optString("source"));
+  //        activity_handle.user = User.parse(jsonObject.optJSONObject("user"));
+  //        activity_handle.mid = jsonObject.optString("mid");
+  //        activity_handle.idstr = jsonObject.optString("idstr");
+  //        activity_handle.status = Status.parse(jsonObject.optJSONObject("status"));
+  //        activity_handle.reply_comment = Comment.parse(jsonObject.optJSONObject("reply_comment"));
   //
-  //        return comment;
+  //        return activity_handle;
   //    }
 
   //    public static Comment parse(String jsonString) {

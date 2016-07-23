@@ -133,6 +133,8 @@
         <dimen name="width_38dp">38dp</dimen>
         <dimen name="height_38dp">38dp</dimen>
         <dimen name="padding_12dp">12dp</dimen>
+        <dimen name="width_13dp">13dp</dimen>
+        <dimen name="height_13dp">13dp</dimen>
 
 
     </resources>

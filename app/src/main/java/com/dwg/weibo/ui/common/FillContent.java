@@ -1,19 +1,25 @@
 package com.dwg.weibo.ui.common;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.ImageAdapter;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.entity.User;
+import com.dwg.weibo.ui.activity.HandleAcitivity;
 import com.dwg.weibo.utils.DateUtils;
 import com.dwg.weibo.utils.TimeUtils;
+import com.dwg.weibo.utils.ToastUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -65,11 +71,12 @@ public class FillContent {
         weibo_content.setText(text);
     }
 
-    public static void fillButtonBar(final Context context, final Status status,  TextView comment, TextView transmit, TextView favour) {
+    public static void fillButtonBar(final Context context, final Status status, LinearLayout linearComment, LinearLayout linearTransmit, LinearLayout linearFavour, TextView comment, TextView transmit, TextView favour) {
         if (status.comments_count != 0) {
             comment.setText(status.comments_count + "");
         } else {
             comment.setText("评论");
+
         }
 
         if (status.reposts_count != 0) {
@@ -83,6 +90,30 @@ public class FillContent {
         } else {
             favour.setText("赞");
         }
+        fillButtonBar(context, status, linearComment, linearTransmit, linearFavour);
+    }
+
+    public static void fillButtonBar(final Context context, Status status, LinearLayout linearComment, LinearLayout linearTransmit, LinearLayout linearFavour) {
+        linearComment.setOnClickListener(new View.OnClickListener() {//评论
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(context, "点击了评论");
+                Intent i = new Intent(context, HandleAcitivity.class);
+                context.startActivity(i);
+            }
+        });
+        linearFavour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(context, "点击了赞");
+            }
+        });
+        linearTransmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(context, "点击了转发");
+            }
+        });
     }
 
     public static void fillFloatBar(final Context context, final Status status, TextView comment,

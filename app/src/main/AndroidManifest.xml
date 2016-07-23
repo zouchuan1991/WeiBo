@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".ui.activity.OriginStatusDetailActivity"/>
         <activity android:name=".ui.activity.RetweetStatusDetailActivity" />
+        <activity android:name=".ui.activity.HandleAcitivity" />
+        <activity android:name=".ui.activity.AlbumActivity" />
     </application>
 
 </manifest>

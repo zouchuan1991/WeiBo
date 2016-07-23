@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/cancal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_12dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textSize="@dimen/text_size_16sp" />
+
+    <LinearLayout
+        android:id="@+id/folder"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_25dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/compose_toolbar_foldername_auto"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_3dp"
+        android:paddingRight="@dimen/padding_3dp">
+
+        <TextView
+            android:id="@+id/foldername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="相机胶卷"
+            android:textColor="#545454"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <ImageView
+            android:id="@+id/folder_arrow"
+            android:layout_width="@dimen/width_13dp"
+            android:layout_height="@dimen/height_13dp"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:src="@drawable/navigationbar_arrow_down" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_12dp"
+        android:background="@drawable/compose_send_corners_bg"
+        android:gravity="center"
+        android:paddingLeft="@dimen/padding_5dp"
+        android:paddingRight="@dimen/padding_5dp"
+        android:text="下一步"
+        android:textColor="#b3b3b3"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e3e3e3" />
+</RelativeLayout>
