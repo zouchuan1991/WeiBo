@@ -135,6 +135,8 @@
         <dimen name="padding_12dp">12dp</dimen>
         <dimen name="width_13dp">13dp</dimen>
         <dimen name="height_13dp">13dp</dimen>
+        <dimen name="width_118dp">118dp</dimen>
+        <dimen name="height_118dp">118dp</dimen>
 
 
     </resources>

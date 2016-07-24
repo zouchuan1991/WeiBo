@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/item_img"
+        android:layout_width="@dimen/width_118dp"
+        android:layout_height="@dimen/height_118dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/compose_toolbar_picture" />
+
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/select_img"
+        android:layout_width="@dimen/width_25dp"
+        android:layout_height="@dimen/height_25dp"
+        android:layout_gravity="top|right"
+        android:paddingRight="@dimen/padding_2dp"
+        android:paddingTop="@dimen/padding_2dp"
+        android:src="@drawable/compose_guide_check_box_default" />
+
+</FrameLayout>
