@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.ImageInf;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2016/7/24.
@@ -66,22 +68,44 @@ public class GridViewAdapter extends BaseAdapter {
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         //viewHolder.itemImg.setImageURI("file:///"+mDatas.get(position).getImageFile().getAbsolutePath());
         showThumb(Uri.parse("file:///" + mDatas.get(position).getImageFile().getAbsolutePath()), viewHolder.itemImg);
-
+        handleSelectedImg(mDatas.get(position), viewHolder);
         return convertView;
 
     }
 
+    private void handleSelectedImg(final ImageInf imageInf, final ViewHolder viewHolder) {
+        viewHolder.selectImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!imageInf.getSecleted()) {
+                    imageInf.setSecleted(true);
+                    viewHolder.itemImg.setColorFilter(0x77000000);
+                    viewHolder.selectImg.setImageResource(R.drawable.compose_photo_preview_right);
+                } else {
+                    imageInf.setSecleted(false);
+                    viewHolder.itemImg.setColorFilter(null);
+                    viewHolder.selectImg.setImageResource(R.drawable.compose_guide_check_box_default);
+                }
+            }
+        });
+    }
+
     public class ViewHolder {
+
 
         @BindView(R.id.item_img)
         SimpleDraweeView itemImg;
         @BindView(R.id.select_img)
-        SimpleDraweeView selectImg;
+        ImageView selectImg;
 
         public ViewHolder(View v) {
             ButterKnife.bind(this, v);
         }
 
+        @OnClick(R.id.select_img)
+        void onSelectedImg(View v) {
+
+        }
     }
 
     public void showThumb(Uri uri, SimpleDraweeView draweeView) {
@@ -89,8 +113,10 @@ public class GridViewAdapter extends BaseAdapter {
                 .setResizeOptions(new ResizeOptions(DensityUtil.dip2px(mContext, 144), DensityUtil.dip2px(mContext, 144)))
                 .build();
 
+
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setImageRequest(request)
+                .setAutoPlayAnimations(true)
                 .setOldController(draweeView.getController())
                 .setControllerListener(new BaseControllerListener<ImageInfo>())
                 .build();

@@ -9,10 +9,11 @@
         android:layout_width="@dimen/width_118dp"
         android:layout_height="@dimen/height_118dp"
         android:scaleType="centerCrop"
+        android:background="@color/gray"
         android:src="@drawable/compose_toolbar_picture" />
 
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/select_img"
         android:layout_width="@dimen/width_25dp"
         android:layout_height="@dimen/height_25dp"

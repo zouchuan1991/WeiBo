@@ -17,6 +17,6 @@ public class WeiboApp extends Application {
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
                 .build();
-        Fresco.initialize(this, config);
+        Fresco.initialize(this);
     }
 }

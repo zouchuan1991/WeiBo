@@ -1,16 +1,12 @@
 package com.dwg.weibo;
 
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.dwg.weibo.api.ApiService;
-import com.dwg.weibo.mvp.model.IStatusService;
-import com.dwg.weibo.entity.StatusList;
 import com.dwg.weibo.ui.activity.BaseActivity;
 import com.dwg.weibo.ui.fragment.BaseFragment;
 import com.dwg.weibo.ui.fragment.HomeFragment;
@@ -23,9 +19,6 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements PlatformActionListener {
 
@@ -57,6 +50,7 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
 
     private void thirdSinaLogin() {
         ShareSDK.initSDK(this);
+
         Platform pf = ShareSDK.getPlatform(MainActivity.this, SinaWeibo.NAME);
         pf.SSOSetting(true);
         //设置监听

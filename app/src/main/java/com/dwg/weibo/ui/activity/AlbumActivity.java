@@ -3,6 +3,7 @@ package com.dwg.weibo.ui.activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +19,7 @@ import com.dwg.weibo.utils.ToastUtils;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2016/7/23.
@@ -45,10 +47,23 @@ public class AlbumActivity extends BaseActivity {
 
     private Context mContext;
     private ArrayList<AlbumFolderInfo> mAlbumFolderInfos;
+    private ImageFolderPopWindow imageFolderPopWindow;
+
+    @OnClick(R.id.folder)
+    void selectFolder(View v) {
+        initImageFolderpopWindow();
+    }
     @Override
     protected void initParams() {
         mContext = this;
         initImageScan();
+
+    }
+
+    private void initImageFolderpopWindow() {
+        imageFolderPopWindow = new ImageFolderPopWindow(mContext, mAlbumFolderInfos);
+        imageFolderPopWindow.showAsDropDown(toolbarLayout);
+
     }
 
     private void initImageScan() {

@@ -2,11 +2,7 @@ package com.dwg.weibo.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-
-import com.dwg.weibo.ui.fragment.BaseFragment;
 
 import butterknife.ButterKnife;
 
