@@ -12,4 +12,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="list_item_status_header_profile_name_color">#f46200</color>
     <color name="list_item_status_header_profile_time_color">#828282</color>
+    <color name="no_access">#b3b3b3</color>
 </resources>

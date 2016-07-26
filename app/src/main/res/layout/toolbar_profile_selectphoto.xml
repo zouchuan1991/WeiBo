@@ -58,7 +58,7 @@
         android:paddingLeft="@dimen/padding_5dp"
         android:paddingRight="@dimen/padding_5dp"
         android:text="下一步"
-        android:textColor="#b3b3b3"
+        android:textColor="@color/no_access"
         android:textSize="16sp" />
 
     <ImageView

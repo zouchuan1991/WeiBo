@@ -1,6 +1,7 @@
 package com.dwg.weibo.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.dwg.weibo.entity.ImageInf;
 import com.dwg.weibo.utils.ImageScan;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,12 +28,18 @@ import butterknife.OnClick;
 public class GridViewAdapter extends BaseAdapter {
     private List<ImageInf> mDatas;
     private Context mContext;
+    private ArrayList<ImageInf> mSelectedImages;
+    private OnSelectedImgListener mOnSelectedImgListener;
 
-    public GridViewAdapter(Context context, List<ImageInf> datas) {
+    public GridViewAdapter(Context context, List<ImageInf> datas, ArrayList<ImageInf> imageInfs) {
         this.mContext = context;
         this.mDatas = datas;
+        this.mSelectedImages = imageInfs;
     }
 
+    public void setOnSelectedImgListener(OnSelectedImgListener onSelectedImgListener) {
+        this.mOnSelectedImgListener = onSelectedImgListener;
+    }
     @Override
     public int getCount() {
         if (mDatas != null) {
@@ -67,22 +75,53 @@ public class GridViewAdapter extends BaseAdapter {
     }
 
     private void handleSelectedImg(final ImageInf imageInf, final ViewHolder viewHolder) {
+        if (imageInf.getSecleted()) {
+            viewHolder.selectImg.setImageResource(R.drawable.compose_photo_preview_right);
+            viewHolder.itemImg.setColorFilter(Color.parseColor("#77000000"));
+        } else {
+            viewHolder.selectImg.setImageResource(R.drawable.compose_guide_check_box_default);
+            viewHolder.itemImg.setColorFilter(null);
+        }
         viewHolder.selectImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!imageInf.getSecleted()) {
                     imageInf.setSecleted(true);
+                    selectedImg(imageInf);
+                    mOnSelectedImgListener.selectedImg(mSelectedImages);
                     viewHolder.itemImg.setColorFilter(0x77000000);
                     viewHolder.selectImg.setImageResource(R.drawable.compose_photo_preview_right);
                 } else {
                     imageInf.setSecleted(false);
+                    disSelectedImg(imageInf);
+                    mOnSelectedImgListener.disSelectedImg(mSelectedImages);
                     viewHolder.itemImg.setColorFilter(null);
                     viewHolder.selectImg.setImageResource(R.drawable.compose_guide_check_box_default);
                 }
             }
+
+
         });
     }
 
+    private void disSelectedImg(ImageInf imageInf) {
+        for (int i = 0; i < mSelectedImages.size(); i++) {
+            if (mSelectedImages.get(i).getImageFile().getAbsolutePath().equals(imageInf.getImageFile().getAbsolutePath())) {
+                mSelectedImages.remove(i);
+            }
+        }
+    }
+
+    private void selectedImg(ImageInf imageInf) {
+        mSelectedImages.add(imageInf);
+
+    }
+
+    public interface OnSelectedImgListener {
+        void selectedImg(ArrayList<ImageInf> imageInfs);
+
+        void disSelectedImg(ArrayList<ImageInf> imageInfs);
+    }
     public class ViewHolder {
 
 
