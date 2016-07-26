@@ -2,6 +2,7 @@ package com.dwg.weibo.utils;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -11,6 +12,14 @@ import android.support.v4.content.Loader;
 
 import com.dwg.weibo.entity.AlbumFolderInfo;
 import com.dwg.weibo.entity.ImageInf;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.image.ImageInfo;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -157,4 +166,19 @@ public abstract class ImageScan {
     }
 
     public abstract void scanFinish(ArrayList<AlbumFolderInfo> folderLists);
+
+    public static void showThumb(Context context, Uri uri, SimpleDraweeView draweeView) {
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+                .setResizeOptions(new ResizeOptions(DensityUtil.dip2px(context, 144), DensityUtil.dip2px(context, 144)))
+                .build();
+
+
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setImageRequest(request)
+                .setAutoPlayAnimations(true)
+                .setOldController(draweeView.getController())
+                .setControllerListener(new BaseControllerListener<ImageInfo>())
+                .build();
+        draweeView.setController(controller);
+    }
 }

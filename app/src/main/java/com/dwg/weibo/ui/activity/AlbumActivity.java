@@ -25,7 +25,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2016/7/23.
  */
 
-public class AlbumActivity extends BaseActivity {
+public class AlbumActivity extends BaseActivity implements ImageFolderPopWindow.OnFolderClickListener {
     @BindView(R.id.cancal)
     TextView cancal;
     @BindView(R.id.foldername)
@@ -48,7 +48,7 @@ public class AlbumActivity extends BaseActivity {
     private Context mContext;
     private ArrayList<AlbumFolderInfo> mAlbumFolderInfos;
     private ImageFolderPopWindow imageFolderPopWindow;
-
+    private int mCurrentFolder = 0;
     @OnClick(R.id.folder)
     void selectFolder(View v) {
         initImageFolderpopWindow();
@@ -63,6 +63,7 @@ public class AlbumActivity extends BaseActivity {
     private void initImageFolderpopWindow() {
         imageFolderPopWindow = new ImageFolderPopWindow(mContext, mAlbumFolderInfos);
         imageFolderPopWindow.showAsDropDown(toolbarLayout);
+        imageFolderPopWindow.setOnFolderClickListener(this);
 
     }
 
@@ -88,7 +89,7 @@ public class AlbumActivity extends BaseActivity {
     };
 
     private void initGridView() {
-        gridview.setAdapter(new GridViewAdapter(mContext, mAlbumFolderInfos.get(0).getImageInfoList()));
+        gridview.setAdapter(new GridViewAdapter(mContext, mAlbumFolderInfos.get(mCurrentFolder).getImageInfoList()));
     }
 
     @Override
@@ -96,5 +97,20 @@ public class AlbumActivity extends BaseActivity {
         return R.layout.activity_pic_select;
     }
 
+    /**
+     * Folder点击的回调
+     */
+    @Override
+    public void onFolderClick(int position) {
+        ToastUtils.showToast(mContext, mAlbumFolderInfos.get(position).getFolderName() + "回调");
+        mCurrentFolder = position;
+        setCurrentFolderName();
+        initGridView();
+        imageFolderPopWindow.dismiss();
 
+    }
+
+    private void setCurrentFolderName() {
+        foldername.setText(mAlbumFolderInfos.get(mCurrentFolder).getFolderName());
+    }
 }

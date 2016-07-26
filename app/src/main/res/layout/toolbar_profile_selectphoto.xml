@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/height_25dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/compose_toolbar_foldername_auto"
+        android:background="@drawable/linearlayout_auto"
         android:clickable="true"
         android:gravity="center"
         android:orientation="horizontal"

@@ -10,15 +10,8 @@ import android.widget.ImageView;
 
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.ImageInf;
-import com.dwg.weibo.utils.DensityUtil;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.controller.BaseControllerListener;
-import com.facebook.drawee.interfaces.DraweeController;
+import com.dwg.weibo.utils.ImageScan;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.common.ResizeOptions;
-import com.facebook.imagepipeline.image.ImageInfo;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.util.List;
 
@@ -67,7 +60,7 @@ public class GridViewAdapter extends BaseAdapter {
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         //viewHolder.itemImg.setImageURI("file:///"+mDatas.get(position).getImageFile().getAbsolutePath());
-        showThumb(Uri.parse("file:///" + mDatas.get(position).getImageFile().getAbsolutePath()), viewHolder.itemImg);
+        ImageScan.showThumb(mContext, Uri.parse("file:///" + mDatas.get(position).getImageFile().getAbsolutePath()), viewHolder.itemImg);
         handleSelectedImg(mDatas.get(position), viewHolder);
         return convertView;
 
@@ -108,18 +101,5 @@ public class GridViewAdapter extends BaseAdapter {
         }
     }
 
-    public void showThumb(Uri uri, SimpleDraweeView draweeView) {
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
-                .setResizeOptions(new ResizeOptions(DensityUtil.dip2px(mContext, 144), DensityUtil.dip2px(mContext, 144)))
-                .build();
 
-
-        DraweeController controller = Fresco.newDraweeControllerBuilder()
-                .setImageRequest(request)
-                .setAutoPlayAnimations(true)
-                .setOldController(draweeView.getController())
-                .setControllerListener(new BaseControllerListener<ImageInfo>())
-                .build();
-        draweeView.setController(controller);
-    }
 }
