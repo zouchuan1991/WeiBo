@@ -1,5 +1,7 @@
 package com.dwg.weibo;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
@@ -7,7 +9,9 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.dwg.weibo.service.PostService;
 import com.dwg.weibo.ui.activity.BaseActivity;
+import com.dwg.weibo.ui.activity.HandleAcitivity;
 import com.dwg.weibo.ui.fragment.BaseFragment;
 import com.dwg.weibo.ui.fragment.HomeFragment;
 
@@ -34,6 +38,8 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     RadioButton mRadioBtnProfile;
     private  String accessToken = null;
     private FragmentManager mFragmentManager;
+    private Context mContext;
+
     @OnClick({R.id.radio_btn_home, R.id.radio_btn_message, R.id.image_btn_add, R.id.radio_btn_discover, R.id.radio_btn_profile})
     public void onTabClick(View view) {
         switch (view.getId()) {
@@ -42,6 +48,9 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
                 thirdSinaLogin();
                 break;
             case R.id.image_btn_add:
+                Intent i = new Intent(mContext, HandleAcitivity.class);
+                i.putExtra("POST_TYPE", PostService.POST_CREATE_WEIBO);
+                startActivity(i);
                 break;
         }
     }
@@ -71,7 +80,7 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
 
     @Override
     protected void initParams() {
-
+        mContext = this;
         mRadioBtnHome.setChecked(true);
         addFragment(new HomeFragment());
     }

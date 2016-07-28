@@ -14,6 +14,7 @@ import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.ImageAdapter;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.entity.User;
+import com.dwg.weibo.service.PostService;
 import com.dwg.weibo.ui.activity.HandleAcitivity;
 import com.dwg.weibo.utils.DateUtils;
 import com.dwg.weibo.utils.TimeUtils;
@@ -93,12 +94,13 @@ public class FillContent {
         fillButtonBar(context, status, linearComment, linearTransmit, linearFavour);
     }
 
-    public static void fillButtonBar(final Context context, Status status, LinearLayout linearComment, LinearLayout linearTransmit, LinearLayout linearFavour) {
+    public static void fillButtonBar(final Context context, final Status status, LinearLayout linearComment, LinearLayout linearTransmit, LinearLayout linearFavour) {
         linearComment.setOnClickListener(new View.OnClickListener() {//评论
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(context, "点击了评论");
                 Intent i = new Intent(context, HandleAcitivity.class);
+                i.putExtra("POST_TYPE", PostService.POST_COMMNET_WEIBO);
+                i.putExtra("createCommentForStatus", status);
                 context.startActivity(i);
             }
         });
@@ -111,7 +113,9 @@ public class FillContent {
         linearTransmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(context, "点击了转发");
+                Intent i = new Intent(context, HandleAcitivity.class);
+                i.putExtra("POST_TYPE", PostService.POST_REPOST_WEIBO);
+                context.startActivity(i);
             }
         });
     }

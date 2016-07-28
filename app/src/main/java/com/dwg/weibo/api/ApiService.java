@@ -1,6 +1,7 @@
 package com.dwg.weibo.api;
 
 import com.dwg.weibo.mvp.model.ICommentService;
+import com.dwg.weibo.mvp.model.IPostService;
 import com.dwg.weibo.mvp.model.IStatusService;
 import com.dwg.weibo.mvp.model.ITransmitService;
 
@@ -31,4 +32,9 @@ public class ApiService {
     public static ITransmitService createTransmitService() {
         return retrofit().create(ITransmitService.class);
     }
+
+    public static IPostService createPostService() {
+        return retrofit().create(IPostService.class);
+    }
+
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.ImageListAdapter;
 import com.dwg.weibo.entity.ImageInf;
+import com.dwg.weibo.entity.Status;
+import com.dwg.weibo.entity.WeiBoCreateBean;
+import com.dwg.weibo.service.PostService;
 import com.dwg.weibo.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -67,12 +71,49 @@ public class HandleAcitivity extends BaseActivity implements ImageListAdapter.On
     @BindView(R.id.more_button)
     ImageView moreButton;
 
+
+    private String mPostType;
+    private Status mCreateCommentForStatus;
+
+    @OnClick(R.id.idea_send)
+    void sendClick(View view) {
+        WeiBoCreateBean weiBoCreateBean = new WeiBoCreateBean(content.getText().toString(), mSelectedImages, mCreateCommentForStatus);
+        Intent i = new Intent(this, PostService.class);
+        i.putExtra("weiboCreateBean", weiBoCreateBean);
+        i.putExtra("POST_TYPE", mPostType);
+        startService(i);
+        finish();
+    }
     private ArrayList<ImageInf> mSelectedImages = new ArrayList<>();
     private Context mContext;
     @Override
     protected void initParams() {
-        inputType.setText("评论");
         mContext = this;
+        mPostType = getIntent().getStringExtra("POST_TYPE");
+        mCreateCommentForStatus = getIntent().getParcelableExtra("createCommentForStatus");
+        initContent();
+        Log.e("POST_TYPE", mPostType);
+    }
+
+    /**
+     * 对不同的界面进行不同的渲染
+     */
+    private void initContent() {
+        switch (mPostType) {
+            case PostService.POST_COMMNET_WEIBO:
+                inputType.setText(R.string.post_comment_weibo);
+                break;
+            case PostService.POST_CREATE_WEIBO:
+                inputType.setText(R.string.post_create_weibo);
+                break;
+            case PostService.POST_REPLY_WEIBO:
+                inputType.setText(R.string.post_reply_weibo);
+                break;
+            case PostService.POST_REPOST_WEIBO:
+                inputType.setText(R.string.post_repost_weibo);
+                repostLayout.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @Override
@@ -111,7 +152,6 @@ public class HandleAcitivity extends BaseActivity implements ImageListAdapter.On
         ImageListAdapter imageListAdapter = new ImageListAdapter(mSelectedImages, mContext);
         imageListAdapter.setOnAddImageClickListener(this);
         mImgRecyclerView.setAdapter(imageListAdapter);
-
     }
 
     @Override
