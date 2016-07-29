@@ -3,9 +3,8 @@ package com.dwg.weibo.ui.fragment;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import butterknife.BindView;
+
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.FragmentHomeAdapter;
 import com.dwg.weibo.adapter.HeaderAndFooterRecyclerAdapter;
@@ -17,7 +16,10 @@ import com.dwg.weibo.ui.common.FillContentHelper;
 import com.dwg.weibo.ui.common.LoadingFooterView;
 import com.dwg.weibo.utils.RecyclerViewStateUtils;
 import com.dwg.weibo.widget.EndlessRecyclerOnScrollListener;
+
 import java.util.ArrayList;
+
+import butterknife.BindView;
 
 /**
  * Created by Administrator on 2016/7/10.
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends BaseFragment implements IHomeFragmentView {
     @BindView(R.id.fragment_home_content)
-    RecyclerView mRecyclerView;
+    MyRecyclerView mRecyclerView;
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     private FragmentHomeAdapter mAdapter;
@@ -33,6 +35,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
     private IHomeFragmentPresenter mHomeFragmentPresenter;
     private ArrayList<Status> mDatas;
     HeaderAndFooterRecyclerAdapter mHeaderAndFooterRecyclerAdapter;
+    LinearLayoutManager linearLayoutManager;
     @Override
     protected void initParams() {
         mContext = getContext();
@@ -49,7 +52,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         });
     }
 
-    LinearLayoutManager linearLayoutManager;
+
     private void initRecyclerView() {
         mDatas = new ArrayList<>();
         mAdapter = new FragmentHomeAdapter(mContext, mDatas);
@@ -59,7 +62,6 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mHeaderAndFooterRecyclerAdapter);
         //以后可能增加设置setHeader
-
     }
 
     @Override

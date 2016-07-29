@@ -33,6 +33,8 @@ public class PostService extends Service {
     public static final String POST_CREATE_WEIBO = "创建微博";
     public static final String POST_COMMNET_WEIBO = "评论微博";
     public static final String POST_REPLY_WEIBO = "回复微博";
+
+    public static final String POST_FAVOUR_WEIBO = "收藏微博";
     private WeiBoCreateBean mWeiBoCreateBean;
 
     @Nullable
@@ -65,17 +67,56 @@ public class PostService extends Service {
             case POST_REPOST_WEIBO:
                 repostWeibo();
                 break;
+            case POST_FAVOUR_WEIBO:
+                favourWeibo();
+                break;
         }
 
 
         return super.onStartCommand(intent, flags, startId);
     }
 
+    private void favourWeibo() {
+        IPostService postService = ApiService.createPostService();
+        Call<Status> model = postService.favourWeibo(
+                HomeFragmentPresenterImp.accessToken,
+                mWeiBoCreateBean.status.id
+        );
+        model.enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                ToastUtils.showToast(mContext, "收藏微博成功");
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+                ToastUtils.showToast(mContext, "收藏失败");
+            }
+        });
+    }
+
     /**
      * 转发微博
      */
     private void repostWeibo() {
-        ToastUtils.showToast(mContext, "转发微博");
+        IPostService postService = ApiService.createPostService();
+        Call<Status> model = postService.repostWeibo(
+                HomeFragmentPresenterImp.accessToken,
+                mWeiBoCreateBean.status.id,
+                mWeiBoCreateBean.content,
+                0
+        );
+        model.enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                ToastUtils.showToast(mContext, "转发成功");
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+                ToastUtils.showToast(mContext, "转发失败");
+            }
+        });
     }
 
     /**

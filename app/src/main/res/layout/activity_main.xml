@@ -1,18 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.dwg.weibo.MainActivity">
-    <FrameLayout
-        android:id="@+id/activity_home_content"
-        android:layout_weight="1"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </FrameLayout>
-    <include layout="@layout/include_footer"/>
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:title="@string/app_name"
+                app:navigationIcon="@drawable/ic_drawer"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50dp">
+
+                <TextView
+                    android:text="微博"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <FrameLayout
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/activity_home_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+        <include layout="@layout/include_footer" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/margin_25dp"
+            android:src="@drawable/ic_menu_add" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <FrameLayout
+        android:id="@+id/drawer_content"
+        android:background="@color/white"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:layout_width="@dimen/measure_240dp"
+        android:layout_height="match_parent"></FrameLayout>
+</android.support.v4.widget.DrawerLayout>

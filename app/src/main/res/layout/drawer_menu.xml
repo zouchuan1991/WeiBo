@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_200dp">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/icon"
+            android:layout_centerInParent="true"
+            android:layout_width="@dimen/width_80dp"
+            android:layout_height="@dimen/height_80dp" />
+
+        <TextView
+            android:id="@+id/nick_name"
+            android:text="梧桐"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/sex"
+            android:layout_marginBottom="@dimen/margin_4dp"
+            android:layout_toRightOf="@+id/nick_name"
+            android:layout_alignBottom="@+id/nick_name"
+            android:src="@drawable/avatar_enterprise_vip"
+            android:layout_width="@dimen/width_13dp"
+            android:layout_height="@dimen/height_13dp"
+            android:layout_marginRight="@dimen/margin_10dp" />
+
+        <LinearLayout
+            android:layout_margin="@dimen/margin_4dp"
+            android:layout_below="@+id/nick_name"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/attention"
+                android:layout_below="@+id/nick_name"
+                android:layout_alignRight="@+id/nick_name"
+                android:text="关注  15"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_margin="@dimen/margin_4dp"
+                android:background="@color/white"
+                android:layout_width="@dimen/width_3dp"
+                android:layout_height="match_parent"></LinearLayout>
+
+            <TextView
+                android:id="@+id/fans"
+                android:layout_below="@+id/nick_name"
+                android:layout_alignRight="@+id/nick_name"
+                android:text="粉丝  35"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/drawer_menu"
+        android:drawableLeft="@drawable/ic_weibo_grey"
+        android:text="微博" />
+
+    <TextView
+        style="@style/drawer_menu"
+        android:drawableLeft="@drawable/ic_notification_gray_24"
+        android:text="通知" />
+
+    <TextView
+        style="@style/drawer_menu"
+        android:drawableLeft="@drawable/ic_email_grey600_24dp"
+        android:text="私信" />
+</LinearLayout>

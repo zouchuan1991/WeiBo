@@ -18,7 +18,9 @@ import com.dwg.weibo.entity.ImageInf;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.entity.WeiBoCreateBean;
 import com.dwg.weibo.service.PostService;
+import com.dwg.weibo.ui.common.FillContent;
 import com.dwg.weibo.utils.ToastUtils;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
@@ -43,7 +45,7 @@ public class HandleAcitivity extends BaseActivity implements ImageListAdapter.On
     @BindView(R.id.content)
     EditText content;
     @BindView(R.id.repost_img)
-    ImageView repostImg;
+    SimpleDraweeView repostImg;
     @BindView(R.id.repost_name)
     TextView repostName;
     @BindView(R.id.repost_content)
@@ -73,11 +75,11 @@ public class HandleAcitivity extends BaseActivity implements ImageListAdapter.On
 
 
     private String mPostType;
-    private Status mCreateCommentForStatus;
+    private Status mStatus;
 
     @OnClick(R.id.idea_send)
     void sendClick(View view) {
-        WeiBoCreateBean weiBoCreateBean = new WeiBoCreateBean(content.getText().toString(), mSelectedImages, mCreateCommentForStatus);
+        WeiBoCreateBean weiBoCreateBean = new WeiBoCreateBean(content.getText().toString(), mSelectedImages, mStatus);
         Intent i = new Intent(this, PostService.class);
         i.putExtra("weiboCreateBean", weiBoCreateBean);
         i.putExtra("POST_TYPE", mPostType);
@@ -90,7 +92,7 @@ public class HandleAcitivity extends BaseActivity implements ImageListAdapter.On
     protected void initParams() {
         mContext = this;
         mPostType = getIntent().getStringExtra("POST_TYPE");
-        mCreateCommentForStatus = getIntent().getParcelableExtra("createCommentForStatus");
+        mStatus = getIntent().getParcelableExtra("createStatus");
         initContent();
         Log.e("POST_TYPE", mPostType);
     }
@@ -111,9 +113,20 @@ public class HandleAcitivity extends BaseActivity implements ImageListAdapter.On
                 break;
             case PostService.POST_REPOST_WEIBO:
                 inputType.setText(R.string.post_repost_weibo);
-                repostLayout.setVisibility(View.VISIBLE);
+                repostWeibo();
                 break;
         }
+    }
+
+    private void repostWeibo() {
+        repostLayout.setVisibility(View.VISIBLE);
+        if (mStatus.retweeted_status != null) {
+            content.setText("//@" + mStatus.retweeted_status.text);
+            FillContent.fillRepostOriginContent(mContext, mStatus.retweeted_status, repostImg, repostName, repostContent);
+        } else {
+            FillContent.fillRepostOriginContent(mContext, mStatus, repostImg, repostName, repostContent);
+        }
+
     }
 
     @Override

@@ -100,7 +100,7 @@ public class FillContent {
             public void onClick(View v) {
                 Intent i = new Intent(context, HandleAcitivity.class);
                 i.putExtra("POST_TYPE", PostService.POST_COMMNET_WEIBO);
-                i.putExtra("createCommentForStatus", status);
+                i.putExtra("createStatus", status);
                 context.startActivity(i);
             }
         });
@@ -108,6 +108,10 @@ public class FillContent {
             @Override
             public void onClick(View v) {
                 ToastUtils.showToast(context, "点击了赞");
+//                Intent i = new Intent(context, PostService.class);
+//                i.putExtra("POST_TYPE", PostService.POST_FAVOUR_WEIBO);
+//                i.putExtra("createCommentForStatus", status);
+//                context.startActivity(i);
             }
         });
         linearTransmit.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +119,7 @@ public class FillContent {
             public void onClick(View v) {
                 Intent i = new Intent(context, HandleAcitivity.class);
                 i.putExtra("POST_TYPE", PostService.POST_REPOST_WEIBO);
+                i.putExtra("createStatus", status);
                 context.startActivity(i);
             }
         });
@@ -189,5 +194,15 @@ public class FillContent {
         }else{
             retweetContent.setText("抱歉，此微博已被作者删除。");
         }
+    }
+
+    public static void fillRepostOriginContent(Context mContext, Status mPostStatus, SimpleDraweeView repostImg, TextView repostName, TextView repostContent) {
+        if (mPostStatus.bmiddle_pic != null) {
+            repostImg.setImageURI(Uri.parse(mPostStatus.bmiddle_pic));
+        } else {
+            repostImg.setImageURI(Uri.parse(mPostStatus.user.avatar_hd));
+        }
+        repostName.setText("@" + mPostStatus.user.name);
+        repostContent.setText(mPostStatus.text);
     }
 }

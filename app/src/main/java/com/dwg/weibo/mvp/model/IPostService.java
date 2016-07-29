@@ -39,4 +39,19 @@ public interface IPostService {
             @Query("id") String id,
             @Query("comment_ori") int commentOri
     );
+
+    @POST("/2/favorites/create.json")
+    Call<Status> favourWeibo(
+            @Query("access_token") String accessToken,
+            @Query("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("/2/statuses/repost.json")
+    Call<Status> repostWeibo(
+            @Query("access_token") String accessToken,
+            @Query("id") String id,
+            @Field("status") String context,
+            @Query("is_comment") int isComment
+    );
 }

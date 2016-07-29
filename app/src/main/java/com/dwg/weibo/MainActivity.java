@@ -3,6 +3,9 @@ package com.dwg.weibo;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,6 +16,7 @@ import com.dwg.weibo.service.PostService;
 import com.dwg.weibo.ui.activity.BaseActivity;
 import com.dwg.weibo.ui.activity.HandleAcitivity;
 import com.dwg.weibo.ui.fragment.BaseFragment;
+import com.dwg.weibo.ui.fragment.DrawerFragment;
 import com.dwg.weibo.ui.fragment.HomeFragment;
 
 import java.util.HashMap;
@@ -36,9 +40,15 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     RadioButton mRadioBtnDiscover;
     @BindView(R.id.radio_btn_profile)
     RadioButton mRadioBtnProfile;
+    @BindView(R.id.activity_main)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     private  String accessToken = null;
     private FragmentManager mFragmentManager;
     private Context mContext;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @OnClick({R.id.radio_btn_home, R.id.radio_btn_message, R.id.image_btn_add, R.id.radio_btn_discover, R.id.radio_btn_profile})
     public void onTabClick(View view) {
@@ -81,13 +91,46 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     @Override
     protected void initParams() {
         mContext = this;
+        mFragmentManager = getSupportFragmentManager();
         mRadioBtnHome.setChecked(true);
+        setSupportActionBar(toolbar);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                mDrawerLayout,
+                //toolbar,
+                R.string.app_name,
+                R.string.app_name
+
+        ) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
         addFragment(new HomeFragment());
+        addDrawerFragment(new DrawerFragment());
+    }
+
+    private void addDrawerFragment(BaseFragment drawerFragment) {
+        mFragmentManager.beginTransaction()
+                .add(R.id.drawer_content, drawerFragment)
+                .commit();
     }
 
     private void addFragment(BaseFragment fragment) {
-        mFragmentManager = getSupportFragmentManager();
-        mFragmentManager.beginTransaction().add(R.id.activity_home_content, fragment).commit();
+
+        mFragmentManager.beginTransaction()
+                .add(R.id.activity_home_content, fragment)
+                .commit();
     }
 
     @Override
