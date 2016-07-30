@@ -86,4 +86,11 @@
         style="@style/drawer_menu"
         android:drawableLeft="@drawable/ic_email_grey600_24dp"
         android:text="私信" />
+
+    <Button
+        android:id="@+id/loginout"
+        android:text="注销"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

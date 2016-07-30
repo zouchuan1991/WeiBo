@@ -32,11 +32,11 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-jackson:2.0.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     testCompile 'junit:junit:4.12'
-    compile files('libs/MobCommons-2016.0623.1641.jar')
-    compile files('libs/MobTools-2016.0623.1641.jar')
-    compile files('libs/ShareSDK-Core-2.7.3.jar')
-    compile files('libs/ShareSDK-SinaWeibo-2.7.3.jar')
     compile 'com.facebook.fresco:fresco:0.11.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:design:24.0.0-beta1'
+    compile files('libs/MobCommons-2016.0707.1708.jar')
+    compile files('libs/MobTools-2016.0707.1708.jar')
+    compile files('libs/ShareSDK-Core-2.7.4.jar')
+    compile files('libs/ShareSDK-SinaWeibo-2.7.4.jar')
 }

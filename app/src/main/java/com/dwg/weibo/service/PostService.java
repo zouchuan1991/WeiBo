@@ -11,7 +11,7 @@ import com.dwg.weibo.api.ApiService;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.entity.WeiBoCreateBean;
 import com.dwg.weibo.mvp.model.IPostService;
-import com.dwg.weibo.mvp.presenter.imp.HomeFragmentPresenterImp;
+import com.dwg.weibo.utils.ShareSdkUtils;
 import com.dwg.weibo.utils.ToastUtils;
 
 import java.io.File;
@@ -79,7 +79,7 @@ public class PostService extends Service {
     private void favourWeibo() {
         IPostService postService = ApiService.createPostService();
         Call<Status> model = postService.favourWeibo(
-                HomeFragmentPresenterImp.accessToken,
+                ShareSdkUtils.getToken(mContext),
                 mWeiBoCreateBean.status.id
         );
         model.enqueue(new Callback<Status>() {
@@ -101,7 +101,7 @@ public class PostService extends Service {
     private void repostWeibo() {
         IPostService postService = ApiService.createPostService();
         Call<Status> model = postService.repostWeibo(
-                HomeFragmentPresenterImp.accessToken,
+                ShareSdkUtils.getToken(mContext),
                 mWeiBoCreateBean.status.id,
                 mWeiBoCreateBean.content,
                 0
@@ -143,7 +143,7 @@ public class PostService extends Service {
     private void commentWeibo() {
         IPostService postService = ApiService.createPostService();
         Call<Status> model = postService.createComment(
-                HomeFragmentPresenterImp.accessToken,
+                ShareSdkUtils.getToken(mContext),
                 mWeiBoCreateBean.content,
                 mWeiBoCreateBean.status.id,
                 0
@@ -170,7 +170,7 @@ public class PostService extends Service {
 
         IPostService postService = ApiService.createPostService();
         Call<Status> statusCall = postService.sendTextContext(
-                HomeFragmentPresenterImp.accessToken,
+                ShareSdkUtils.getToken(mContext),
                 weiBoCreateBean.content
         );
         statusCall.enqueue(new Callback<Status>() {
@@ -203,7 +203,7 @@ public class PostService extends Service {
 //        }
         RequestBody accessBody = RequestBody.create(
                 MediaType.parse("text/plain"),
-                HomeFragmentPresenterImp.accessToken
+                ShareSdkUtils.getToken(mContext)
         );
         RequestBody contentBody = RequestBody.create(
                 MediaType.parse("text/plain"),

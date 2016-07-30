@@ -13,6 +13,7 @@ import com.dwg.weibo.mvp.model.ITransmitService;
 import com.dwg.weibo.mvp.presenter.IStatusDetailPresenter;
 import com.dwg.weibo.ui.activity.BaseDetailActivity;
 import com.dwg.weibo.ui.common.RequestParam;
+import com.dwg.weibo.utils.ShareSdkUtils;
 import com.dwg.weibo.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
     this.mContext = context;
     ICommentService commentService = ApiService.createCommentService();
     Call<CommentList> model = commentService.getCommentList(
-        HomeFragmentPresenterImp.accessToken,
+            ShareSdkUtils.getToken(mContext),
         mStatus.id,
         mComments.size() == 0 ? "0" : mComments.get(0).id,
         "0",
@@ -71,7 +72,7 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
     this.mContext = context;
     ICommentService commentService = ApiService.createCommentService();
     Call<CommentList> model = commentService.getCommentList(
-        HomeFragmentPresenterImp.accessToken,
+            ShareSdkUtils.getToken(mContext),
         mStatus.id,
         "0",
         mComments.size() == 0 ? "0" : mComments.get(mComments.size() - 1).id,
@@ -101,7 +102,7 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
     this.mContext = context;
     ITransmitService iTransmitService = ApiService.createTransmitService();
     Call<RepostList> model = iTransmitService.getRepostList(
-            HomeFragmentPresenterImp.accessToken,
+            ShareSdkUtils.getToken(mContext),
             mStatus.id,
             mReposts.size() == 0 ? "0" : mReposts.get(0).id,
             "0",

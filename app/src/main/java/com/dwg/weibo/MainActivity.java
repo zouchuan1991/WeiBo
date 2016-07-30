@@ -1,12 +1,13 @@
 package com.dwg.weibo;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -18,6 +19,8 @@ import com.dwg.weibo.ui.activity.HandleAcitivity;
 import com.dwg.weibo.ui.fragment.BaseFragment;
 import com.dwg.weibo.ui.fragment.DrawerFragment;
 import com.dwg.weibo.ui.fragment.HomeFragment;
+import com.dwg.weibo.utils.ShareSdkUtils;
+import com.dwg.weibo.utils.ToastUtils;
 
 import java.util.HashMap;
 
@@ -25,8 +28,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.sina.weibo.SinaWeibo;
 
 public class MainActivity extends BaseActivity implements PlatformActionListener {
 
@@ -45,7 +46,6 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private  String accessToken = null;
     private FragmentManager mFragmentManager;
     private Context mContext;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -68,23 +68,8 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
 
 
     private void thirdSinaLogin() {
-        ShareSDK.initSDK(this);
 
-        Platform pf = ShareSDK.getPlatform(MainActivity.this, SinaWeibo.NAME);
-        pf.SSOSetting(true);
-        //设置监听
-        pf.setPlatformActionListener(this);
-        //获取登陆用户的信息，如果没有授权，会先授权，然后获取用户信息
-        if(!pf.isAuthValid()){
-            pf.authorize(null);
-        }else{
-            String token = pf.getDb().getToken();
-            accessToken = token;
-            String userId = pf.getDb().getUserId();
-            Log.e("验证通过","yanzhengtongguo");
-            Log.e("userName:",token);
-            Log.e("userIcan",userId);
-        }
+
     }
 
 
@@ -116,8 +101,11 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
-        addFragment(new HomeFragment());
         addDrawerFragment(new DrawerFragment());
+        addFragment(new HomeFragment());
+        if (!ShareSdkUtils.isAuthorize(mContext)) {
+            ShareSdkUtils.authorize(mContext);
+        }
     }
 
     private void addDrawerFragment(BaseFragment drawerFragment) {
@@ -140,17 +128,37 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
 
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> res) {
-
-
+        ToastUtils.showToast(mContext, "授权成功");
     }
 
     @Override
     public void onError(Platform platform, int i, Throwable throwable) {
-
+        ToastUtils.showToast(mContext, "授权失败");
+        createDialog();
     }
 
     @Override
     public void onCancel(Platform platform, int i) {
+        ToastUtils.showToast(mContext, "取消授权");
+        createDialog();
+    }
 
+    public void createDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setMessage("授权失败，是否重新授权");
+        builder.setPositiveButton("再次授权", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ShareSdkUtils.authorize(mContext);
+            }
+        });
+        builder.setNegativeButton("退出应用", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.create();
+        builder.show();
     }
 }

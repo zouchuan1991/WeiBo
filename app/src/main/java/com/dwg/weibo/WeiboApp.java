@@ -5,6 +5,8 @@ import android.app.Application;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by Administrator on 2016/7/10.
  */
@@ -18,5 +20,6 @@ public class WeiboApp extends Application {
                 .setDownsampleEnabled(true)
                 .build();
         Fresco.initialize(this);
+        ShareSDK.initSDK(this);
     }
 }
