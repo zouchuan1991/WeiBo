@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/compose_repost_layout" />
+
+    <RelativeLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/comment_image"
+            fresco:roundAsCircle="true"
+            android:layout_width="@dimen/width_50dp"
+            android:layout_height="@dimen/height_50dp" />
+
+        <TextView
+            android:id="@+id/comment_name"
+            android:layout_toRightOf="@+id/comment_image"
+            android:text="梧桐"
+            android:layout_margin="@dimen/margin_5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/comment_time"
+            android:text="时间"
+            android:layout_alignLeft="@+id/comment_name"
+            android:layout_alignBottom="@+id/comment_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/reply"
+            android:text="回复"
+            android:textSize="@dimen/height_13dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:background="@drawable/compose_send_corners_bg"
+            android:layout_margin="@dimen/margin_10dp"
+            android:layout_width="@dimen/width_50dp"
+            android:layout_height="@dimen/height_25dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/comment_content"
+        android:text="回复内容"
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_3dp">
+
+    </LinearLayout>
+</LinearLayout>

@@ -69,6 +69,11 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         return R.layout.fragment_home;
     }
 
+    @Override
+    protected int updateDatas() {
+        return 0;
+    }
+
 
     @Override
     public void updateListView(ArrayList<Status> statuses) {

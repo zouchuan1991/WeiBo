@@ -1,76 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <FrameLayout
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_200dp">
-
+        android:layout_height="@dimen/width_200dp">
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/icon"
-            android:layout_centerInParent="true"
-            android:layout_width="@dimen/width_80dp"
-            android:layout_height="@dimen/height_80dp" />
+            android:id="@+id/backImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/nick_name"
-            android:text="梧桐"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_18sp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_200dp">
 
-        <ImageView
-            android:id="@+id/sex"
-            android:layout_marginBottom="@dimen/margin_4dp"
-            android:layout_toRightOf="@+id/nick_name"
-            android:layout_alignBottom="@+id/nick_name"
-            android:src="@drawable/avatar_enterprise_vip"
-            android:layout_width="@dimen/width_13dp"
-            android:layout_height="@dimen/height_13dp"
-            android:layout_marginRight="@dimen/margin_10dp" />
-
-        <LinearLayout
-            android:layout_margin="@dimen/margin_4dp"
-            android:layout_below="@+id/nick_name"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/icon"
+                fresco:roundAsCircle="true"
+                android:layout_centerInParent="true"
+                android:layout_width="@dimen/width_80dp"
+                android:layout_height="@dimen/height_80dp" />
 
             <TextView
-                android:id="@+id/attention"
-                android:layout_below="@+id/nick_name"
-                android:layout_alignRight="@+id/nick_name"
-                android:text="关注  15"
+                android:id="@+id/nick_name"
+                android:text="梧桐"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/sex"
+                android:layout_marginBottom="@dimen/margin_4dp"
+                android:layout_toRightOf="@+id/nick_name"
+                android:layout_alignBottom="@+id/nick_name"
+                android:src="@drawable/avatar_enterprise_vip"
+                android:layout_width="@dimen/width_13dp"
+                android:layout_height="@dimen/height_13dp"
+                android:layout_marginRight="@dimen/margin_10dp" />
 
             <LinearLayout
                 android:layout_margin="@dimen/margin_4dp"
-                android:background="@color/white"
-                android:layout_width="@dimen/width_3dp"
-                android:layout_height="match_parent"></LinearLayout>
-
-            <TextView
-                android:id="@+id/fans"
                 android:layout_below="@+id/nick_name"
-                android:layout_alignRight="@+id/nick_name"
-                android:text="粉丝  35"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_18sp"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content">
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/attention"
+                    android:layout_below="@+id/nick_name"
+                    android:layout_alignRight="@+id/nick_name"
+                    android:text="关注  15"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_margin="@dimen/margin_4dp"
+                    android:background="@color/white"
+                    android:layout_width="@dimen/width_1dp"
+                    android:layout_height="match_parent"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/fans"
+                    android:layout_below="@+id/nick_name"
+                    android:layout_alignRight="@+id/nick_name"
+                    android:text="粉丝  35"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </FrameLayout>
+
 
     <TextView
         style="@style/drawer_menu"

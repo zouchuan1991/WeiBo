@@ -8,7 +8,7 @@
     android:layout_marginRight="15dp"
     android:layout_marginTop="15dp"
     android:orientation="horizontal"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/repost_img"

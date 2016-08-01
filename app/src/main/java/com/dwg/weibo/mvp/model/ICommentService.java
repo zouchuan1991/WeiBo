@@ -2,7 +2,9 @@ package com.dwg.weibo.mvp.model;
 
 import com.dwg.weibo.entity.Comment;
 import com.dwg.weibo.entity.CommentList;
+
 import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -19,6 +21,15 @@ public interface ICommentService {
       @Query("count") int count,
       @Query("page") int page,
       @Query("filter_by_author") int fileterByAythor
+  );
+
+  @GET("/2/comments/to_me.json")
+  Call<CommentList> getToMeComment(
+          @Query("access_token") String accessToken,
+          @Query("since_id") String sinceId,
+          @Query("max_id") String maxId,
+          @Query("count") int count,
+          @Query("page") int page
   );
 
   interface OnCommentCallBack {

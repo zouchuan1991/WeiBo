@@ -18,7 +18,7 @@ import com.dwg.weibo.ui.activity.BaseActivity;
 import com.dwg.weibo.ui.activity.HandleAcitivity;
 import com.dwg.weibo.ui.fragment.BaseFragment;
 import com.dwg.weibo.ui.fragment.DrawerFragment;
-import com.dwg.weibo.ui.fragment.HomeFragment;
+import com.dwg.weibo.ui.fragment.NotificationFragment;
 import com.dwg.weibo.utils.ShareSdkUtils;
 import com.dwg.weibo.utils.ToastUtils;
 
@@ -101,11 +101,13 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
-        addDrawerFragment(new DrawerFragment());
-        addFragment(new HomeFragment());
+
         if (!ShareSdkUtils.isAuthorize(mContext)) {
             ShareSdkUtils.authorize(mContext);
         }
+        addDrawerFragment(new DrawerFragment());
+        addFragment(new NotificationFragment());
+
     }
 
     private void addDrawerFragment(BaseFragment drawerFragment) {
@@ -129,6 +131,7 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> res) {
         ToastUtils.showToast(mContext, "授权成功");
+
     }
 
     @Override

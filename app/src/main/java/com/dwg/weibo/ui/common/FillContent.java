@@ -11,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dwg.weibo.R;
+import com.dwg.weibo.adapter.CommentFragmentAdapter;
 import com.dwg.weibo.adapter.ImageAdapter;
+import com.dwg.weibo.entity.Comment;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.entity.User;
 import com.dwg.weibo.service.PostService;
@@ -204,5 +206,32 @@ public class FillContent {
         }
         repostName.setText("@" + mPostStatus.user.name);
         repostContent.setText(mPostStatus.text);
+    }
+
+    public static void fillUserInfo(Context mContext, User user, SimpleDraweeView backImage,
+                                    SimpleDraweeView userIcon, TextView userNickName,
+                                    TextView friendsCount, TextView followsCount, ImageView sex) {
+        backImage.setImageURI(user.cover_image_phone);
+        userIcon.setImageURI(user.avatar_hd);
+        userNickName.setText(user.screen_name);
+        friendsCount.setText("关注  " + user.friends_count);
+        followsCount.setText("粉丝  " + user.followers_count);
+        if (user.gender.equals("m")) {
+            sex.setImageResource(R.drawable.list_male);
+        } else if (user.gender.equals("f")) {
+            sex.setImageResource(R.drawable.list_female);
+        }
+    }
+
+    public static void fillToMeComment(Context context, CommentFragmentAdapter.ViewHolder holder, Comment comment) {
+        if (comment.status.retweeted_status != null) {
+            FillContent.fillRepostOriginContent(context, comment.status.retweeted_status, holder.repostImg, holder.repostName, holder.repostContent);
+        } else {
+            FillContent.fillRepostOriginContent(context, comment.status, holder.repostImg, holder.repostName, holder.repostContent);
+        }
+        holder.commentImage.setImageURI(comment.user.avatar_hd);
+        holder.commentName.setText(comment.user.screen_name);
+        setWeiBoTime(context, holder.commentTime, comment.created_at);
+        holder.commentContent.setText(comment.text);
     }
 }

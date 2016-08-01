@@ -27,5 +27,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayoutId();
 
+    protected abstract int updateDatas();
+
 
 }

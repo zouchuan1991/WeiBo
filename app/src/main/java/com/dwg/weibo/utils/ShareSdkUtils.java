@@ -54,6 +54,11 @@ public class ShareSdkUtils {
         }
     }
 
+    public static String getUid(Context context) {
+        Platform platform = ShareSDK.getPlatform(context, SinaWeibo.NAME);
+        return platform.getDb().getUserId();
+    }
+
     public static boolean isAuthorize(Context context) {
         Platform platform = ShareSDK.getPlatform(context, SinaWeibo.NAME);
         return platform.isValid();

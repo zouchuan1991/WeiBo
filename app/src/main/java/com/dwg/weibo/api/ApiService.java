@@ -4,6 +4,7 @@ import com.dwg.weibo.mvp.model.ICommentService;
 import com.dwg.weibo.mvp.model.IPostService;
 import com.dwg.weibo.mvp.model.IStatusService;
 import com.dwg.weibo.mvp.model.ITransmitService;
+import com.dwg.weibo.mvp.model.IUserService;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -35,6 +36,10 @@ public class ApiService {
 
     public static IPostService createPostService() {
         return retrofit().create(IPostService.class);
+    }
+
+    public static IUserService createUserService() {
+        return retrofit().create(IUserService.class);
     }
 
 }
