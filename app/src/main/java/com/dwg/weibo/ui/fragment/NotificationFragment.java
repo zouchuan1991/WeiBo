@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.NotificationViewPager;
+import com.dwg.weibo.utils.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -24,12 +25,19 @@ public class NotificationFragment extends BaseFragment {
 
     private NotificationViewPager notificationViewPager;
     private Context mContext;
-    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private ArrayList<Fragment> mFragments;
     private int[] mTitle = new int[]{R.string.tab_comment, R.string.tab_atme, R.string.tab_mycomment, R.string.tab_sendcomment};
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     protected void initParams() {
         this.mContext = getActivity();
+        ToastUtils.showToast(mContext, "调用了init方法");
+        mFragments = new ArrayList<>();
         mFragments.add(new CommentFragment());
         mFragments.add(new AtMeFragment());
         mFragments.add(new MyCommentFragment());

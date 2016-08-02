@@ -84,10 +84,14 @@ public class HomeFragmentPresenterImp implements IHomeFragmentPresenter {
             public void onResponse(Call<StatusList> call, Response<StatusList> response) {
                 Toast.makeText(context, "成功获取数据" + response.body().statuses.size(), Toast.LENGTH_SHORT).show();
                 if (response.body().statuses.size() != 0) {//有新数据才进行刷新
-                    mStatus.addAll(response.body().statuses);
-                    mOnMoreDataListener.onDataFinish(mStatus);
-                } else {
-                    mOnMoreDataListener.noMoreData();
+                    if (response.body().statuses.size() >= 2) {
+                        response.body().statuses.remove(0);
+                        mStatus.addAll(response.body().statuses);
+                        mOnMoreDataListener.onDataFinish(mStatus);
+                    } else {
+                        mOnMoreDataListener.noMoreData();
+                    }
+
                 }
             }
 

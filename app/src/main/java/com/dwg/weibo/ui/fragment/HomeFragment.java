@@ -47,9 +47,10 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
             @Override
             public void onRefresh() {
                 mSwipeRefreshLayout.setRefreshing(false);
-                mHomeFragmentPresenter.firstLoadDatas(mContext);
+                updateDatas();
             }
         });
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
 
@@ -70,13 +71,15 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
     }
 
     @Override
-    protected int updateDatas() {
+    public int updateDatas() {
+        mHomeFragmentPresenter.firstLoadDatas(mContext);
         return 0;
     }
 
 
     @Override
     public void updateListView(ArrayList<Status> statuses) {
+        mSwipeRefreshLayout.setRefreshing(false);
         int position = mHeaderAndFooterRecyclerAdapter.getItemCount();
         mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
         for(Status status:statuses){

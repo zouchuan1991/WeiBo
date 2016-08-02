@@ -85,16 +85,19 @@
 
 
     <TextView
+        android:id="@+id/weibo"
         style="@style/drawer_menu"
         android:drawableLeft="@drawable/ic_weibo_grey"
         android:text="微博" />
 
     <TextView
+        android:id="@+id/notification"
         style="@style/drawer_menu"
         android:drawableLeft="@drawable/ic_notification_gray_24"
         android:text="通知" />
 
     <TextView
+        android:id="@+id/private_message"
         style="@style/drawer_menu"
         android:drawableLeft="@drawable/ic_email_grey600_24dp"
         android:text="私信" />

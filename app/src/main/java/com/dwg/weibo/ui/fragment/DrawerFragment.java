@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dwg.weibo.MainActivity;
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.User;
 import com.dwg.weibo.mvp.presenter.IDrawerFragmentPresenter;
@@ -23,8 +24,8 @@ import butterknife.OnClick;
  */
 
 public class DrawerFragment extends BaseFragment implements IDrawerFragmentView {
-    @BindView(R.id.loginout)
-    Button mBtLoginOut;
+
+
     @BindView(R.id.backImage)
     SimpleDraweeView backImage;
     @BindView(R.id.icon)
@@ -37,7 +38,14 @@ public class DrawerFragment extends BaseFragment implements IDrawerFragmentView 
     TextView attention;
     @BindView(R.id.fans)
     TextView fans;
-
+    @BindView(R.id.weibo)
+    TextView weibo;
+    @BindView(R.id.notification)
+    TextView notification;
+    @BindView(R.id.private_message)
+    TextView privateMessage;
+    @BindView(R.id.loginout)
+    Button loginout;
     private Context mContext;
     IDrawerFragmentPresenter drawerFragmentPresenter;
 
@@ -60,7 +68,7 @@ public class DrawerFragment extends BaseFragment implements IDrawerFragmentView 
     }
 
     @Override
-    protected int updateDatas() {
+    public int updateDatas() {
         drawerFragmentPresenter.requestUserInfo();
         return 0;
     }
@@ -71,4 +79,17 @@ public class DrawerFragment extends BaseFragment implements IDrawerFragmentView 
     }
 
 
+    @OnClick({R.id.weibo, R.id.notification, R.id.private_message})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.weibo:
+                ((MainActivity) mContext).replaceFragment(MainActivity.TYPE_HOME_FRAGMENT);
+                break;
+            case R.id.notification:
+                ((MainActivity) mContext).replaceFragment(MainActivity.TYPE_COMMENT_FRAGMENT);
+                break;
+            case R.id.private_message:
+                break;
+        }
+    }
 }

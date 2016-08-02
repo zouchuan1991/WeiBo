@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,7 @@ import com.dwg.weibo.ui.activity.BaseActivity;
 import com.dwg.weibo.ui.activity.HandleAcitivity;
 import com.dwg.weibo.ui.fragment.BaseFragment;
 import com.dwg.weibo.ui.fragment.DrawerFragment;
+import com.dwg.weibo.ui.fragment.HomeFragment;
 import com.dwg.weibo.ui.fragment.NotificationFragment;
 import com.dwg.weibo.utils.ShareSdkUtils;
 import com.dwg.weibo.utils.ToastUtils;
@@ -49,7 +51,11 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     private FragmentManager mFragmentManager;
     private Context mContext;
     private ActionBarDrawerToggle mDrawerToggle;
-
+    private BaseFragment mHomeFragment;
+    private BaseFragment mNotificationFragment;
+    private DrawerFragment mDrawerFragment;
+    public static final String TYPE_HOME_FRAGMENT = "HOME_FRAGMENT";
+    public static final String TYPE_COMMENT_FRAGMENT = "COMMENT_FRAGMENT";
     @OnClick({R.id.radio_btn_home, R.id.radio_btn_message, R.id.image_btn_add, R.id.radio_btn_discover, R.id.radio_btn_profile})
     public void onTabClick(View view) {
         switch (view.getId()) {
@@ -105,9 +111,11 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
         if (!ShareSdkUtils.isAuthorize(mContext)) {
             ShareSdkUtils.authorize(mContext);
         }
-        addDrawerFragment(new DrawerFragment());
-        addFragment(new NotificationFragment());
-
+        mHomeFragment = new HomeFragment();
+        mNotificationFragment = new NotificationFragment();
+        mDrawerFragment = new DrawerFragment();
+        addDrawerFragment(mDrawerFragment);
+        addFragment(mHomeFragment);
     }
 
     private void addDrawerFragment(BaseFragment drawerFragment) {
@@ -119,10 +127,44 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     private void addFragment(BaseFragment fragment) {
 
         mFragmentManager.beginTransaction()
-                .add(R.id.activity_home_content, fragment)
+                .add(R.id.activity_home_content, fragment, "homeFragment")
                 .commit();
     }
 
+    public void replaceFragment(String type) {
+        mDrawerLayout.closeDrawers();
+        BaseFragment fragment;
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        switch (type) {
+            case TYPE_HOME_FRAGMENT:
+                fragment = mHomeFragment;
+                if (!fragment.isAdded()) {
+                    transaction.hide(mNotificationFragment)
+                            .add(R.id.activity_home_content, mHomeFragment)
+                            .commit();
+                } else {
+                    transaction.hide(mNotificationFragment)
+                            .show(mHomeFragment)
+                            .commit();
+                }
+                break;
+            case TYPE_COMMENT_FRAGMENT:
+                fragment = mNotificationFragment;
+                if (!fragment.isAdded()) {
+                    transaction.hide(mHomeFragment)
+                            .add(R.id.activity_home_content, mNotificationFragment)
+                            .commit();
+                } else {
+                    transaction.hide(mHomeFragment)
+                            .show(mNotificationFragment)
+                            .commit();
+                }
+                break;
+            default:
+        }
+
+
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -131,7 +173,7 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> res) {
         ToastUtils.showToast(mContext, "授权成功");
-
+        mDrawerFragment.updateDatas();
     }
 
     @Override

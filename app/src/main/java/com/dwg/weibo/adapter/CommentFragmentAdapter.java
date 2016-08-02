@@ -10,9 +10,10 @@ import android.widget.TextView;
 
 import com.dwg.weibo.R;
 import com.dwg.weibo.entity.Comment;
-import com.dwg.weibo.entity.CommentList;
 import com.dwg.weibo.ui.common.FillContent;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,14 +24,14 @@ import butterknife.ButterKnife;
 
 public class CommentFragmentAdapter extends RecyclerView.Adapter<CommentFragmentAdapter.ViewHolder> {
     private Context mContext;
-    private CommentList mDatas;
+    private ArrayList<Comment> mDatas;
 
-    public CommentFragmentAdapter(Context mContext, CommentList mDatas) {
+    public CommentFragmentAdapter(Context mContext, ArrayList<Comment> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
     }
 
-    public void setmDatas(CommentList commentList) {
+    public void setmDatas(ArrayList<Comment> commentList) {
         this.mDatas = commentList;
     }
 
@@ -42,14 +43,14 @@ public class CommentFragmentAdapter extends RecyclerView.Adapter<CommentFragment
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Comment comment = mDatas.comments.get(position);
+        Comment comment = mDatas.get(position);
         FillContent.fillToMeComment(mContext, holder, comment);
     }
 
     @Override
     public int getItemCount() {
-        if (mDatas.comments != null) {
-            return mDatas.comments.size();
+        if (mDatas != null) {
+            return mDatas.size();
         } else {
             return 0;
         }
