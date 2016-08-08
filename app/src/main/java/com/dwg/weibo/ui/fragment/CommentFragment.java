@@ -41,17 +41,6 @@ public class CommentFragment extends BaseFragment implements ICommentFragmentVie
     private HeaderAndFooterRecyclerAdapter headerAndFooterRecyclerAdapter;
     private ICommentFragmentPresenter commentFragmentPresenter;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.e("onStart", "onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.e("onResume", "onResume");
-    }
 
 
     @Override

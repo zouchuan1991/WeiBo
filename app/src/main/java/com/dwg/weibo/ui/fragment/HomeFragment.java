@@ -34,6 +34,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
     private Context mContext;
     private IHomeFragmentPresenter mHomeFragmentPresenter;
     private ArrayList<Status> mDatas;
+
     HeaderAndFooterRecyclerAdapter mHeaderAndFooterRecyclerAdapter;
     LinearLayoutManager linearLayoutManager;
     @Override
@@ -41,16 +42,10 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         mContext = getContext();
         initRecyclerView();
         mHomeFragmentPresenter = new HomeFragmentPresenterImp(this);
-        mHomeFragmentPresenter.firstLoadDatas(mContext);
+
         mSwipeRefreshLayout.setColorSchemeColors(mContext.getResources().getColor(R.color.red));
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSwipeRefreshLayout.setRefreshing(false);
-                updateDatas();
-            }
-        });
-        mSwipeRefreshLayout.setRefreshing(true);
+        mSwipeRefreshLayout.setOnRefreshListener(refreshListener);
+        updateDatas();
     }
 
 
@@ -72,7 +67,14 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
 
     @Override
     public int updateDatas() {
-        mHomeFragmentPresenter.firstLoadDatas(mContext);
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+        });
+        refreshListener.onRefresh();
+
         return 0;
     }
 
@@ -143,6 +145,12 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
                 mHomeFragmentPresenter.requestMoreData(mContext);
                 showLoadFooterView();
             }
+        }
+    };
+    SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            mHomeFragmentPresenter.firstLoadDatas(mContext);
         }
     };
 }

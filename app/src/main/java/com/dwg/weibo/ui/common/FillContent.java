@@ -21,6 +21,7 @@ import com.dwg.weibo.ui.activity.HandleAcitivity;
 import com.dwg.weibo.utils.DateUtils;
 import com.dwg.weibo.utils.TimeUtils;
 import com.dwg.weibo.utils.ToastUtils;
+import com.dwg.weibo.utils.WeiboContent;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class FillContent {
     }
 
     public static void fillWeiBoContent(Context mContext, TextView weibo_content, String text) {
-        weibo_content.setText(text);
+        weibo_content.setText(WeiboContent.getSpannableStringBuilder(mContext, text));
     }
 
     public static void fillButtonBar(final Context context, final Status status, LinearLayout linearComment, LinearLayout linearTransmit, LinearLayout linearFavour, TextView comment, TextView transmit, TextView favour) {
@@ -192,7 +193,7 @@ public class FillContent {
             retweetcontent_buffer.append("@");
             retweetcontent_buffer.append(status.retweeted_status.user.name + " :  ");
             retweetcontent_buffer.append(status.retweeted_status.text);
-            retweetContent.setText(retweetcontent_buffer);
+            retweetContent.setText(WeiboContent.getSpannableStringBuilder(mContext, retweetcontent_buffer.toString()));
         }else{
             retweetContent.setText("抱歉，此微博已被作者删除。");
         }
@@ -205,7 +206,7 @@ public class FillContent {
             repostImg.setImageURI(Uri.parse(mPostStatus.user.avatar_hd));
         }
         repostName.setText("@" + mPostStatus.user.name);
-        repostContent.setText(mPostStatus.text);
+        repostContent.setText(WeiboContent.getSpannableStringBuilder(mContext, mPostStatus.text));
     }
 
     public static void fillUserInfo(Context mContext, User user, SimpleDraweeView backImage,
@@ -232,6 +233,6 @@ public class FillContent {
         holder.commentImage.setImageURI(comment.user.avatar_hd);
         holder.commentName.setText(comment.user.screen_name);
         setWeiBoTime(context, holder.commentTime, comment.created_at);
-        holder.commentContent.setText(comment.text);
+        holder.commentContent.setText(WeiboContent.getSpannableStringBuilder(context, comment.text));
     }
 }

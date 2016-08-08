@@ -52,7 +52,6 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
     model.enqueue(new Callback<CommentList>() {
       @Override
       public void onResponse(Call<CommentList> call, Response<CommentList> response) {
-        ToastUtils.showToast(mContext, "成功获取数据");
         if (response != null && response.body() != null && response.body().comments.size() != 0) {
           response.body().comments.addAll(mComments);
           mComments = response.body().comments;
@@ -84,10 +83,13 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
       @Override
       public void onResponse(Call<CommentList> call, Response<CommentList> response) {
         if (response.body().comments.size() != 0) {
+          if (response.body().comments.size() >= 2) {
+            response.body().comments.remove(0);
+          } else {
+            onRequestMoreComment.noMoreDate();
+          }
           mComments.addAll(response.body().comments);
           onRequestMoreComment.onDataFinish(mComments);
-        } else {
-          onRequestMoreComment.noMoreDate();
         }
       }
 
@@ -117,6 +119,7 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
           response.body().reposts.addAll(mReposts);
           mReposts = response.body().reposts;
           onRepostCallBack.onDataFinish(mReposts);
+
         } else {
           onRepostCallBack.noMoreDate();
         }
@@ -167,7 +170,7 @@ public class StatusDetailPresenterImp implements IStatusDetailPresenter {
   ITransmitService.OnTransmitCallBack onRepostCallBack = new ITransmitService.OnTransmitCallBack() {
     @Override
     public void noMoreDate() {
-
+      ToastUtils.showToast(mContext, "没有得到数据");
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.dwg.weibo.ui.common;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -80,6 +81,7 @@ public class OriginHeaderView extends LinearLayout {
     switch (v.getId()) {
       case R.id.commentBar_comment:
         if (mCurrentTab != 2) {
+          Log.e("得到转发数据列表", "得到了");
           ((BaseDetailActivity) mContext).mStatusDetailPresenter.pullToRefreshComment(mContext);
           mCurrentTab = 2;
         }

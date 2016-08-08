@@ -16,6 +16,7 @@
     <dimen name="measure_80dp">80dp</dimen>
     <dimen name="measure_120dp">120dp</dimen>
     <dimen name="measure_240dp">240dp</dimen>
+    <dimen name="measure_300dp">300dp</dimen>
     <!-- radius -->
     <dimen name="radius_15dp">15dp</dimen>
     <dimen name="radius_50dp">50dp</dimen>
