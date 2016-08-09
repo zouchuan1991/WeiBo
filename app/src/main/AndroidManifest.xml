@@ -41,7 +41,7 @@
         <activity android:name=".ui.activity.RetweetStatusDetailActivity" />
         <activity android:name=".ui.activity.HandleAcitivity" />
         <activity android:name=".ui.activity.AlbumActivity" />
-
+        <activity android:name=".ui.activity.ProfileActivity" />
         <service android:name=".service.PostService" />
     </application>
 

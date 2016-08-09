@@ -1,9 +1,11 @@
 package com.dwg.weibo.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dwg.weibo.MainActivity;
@@ -12,6 +14,7 @@ import com.dwg.weibo.entity.User;
 import com.dwg.weibo.mvp.presenter.IDrawerFragmentPresenter;
 import com.dwg.weibo.mvp.presenter.imp.DrawerFragmentPresenter;
 import com.dwg.weibo.mvp.view.IDrawerFragmentView;
+import com.dwg.weibo.ui.activity.ProfileActivity;
 import com.dwg.weibo.ui.common.FillContent;
 import com.dwg.weibo.utils.ShareSdkUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -46,12 +49,25 @@ public class DrawerFragment extends BaseFragment implements IDrawerFragmentView 
     TextView privateMessage;
     @BindView(R.id.loginout)
     Button loginout;
+    @BindView(R.id.profile)
+    RelativeLayout layout;
+
     private Context mContext;
     IDrawerFragmentPresenter drawerFragmentPresenter;
+    private User mUser;
 
-    @OnClick(R.id.loginout)
+    @OnClick({R.id.loginout, R.id.profile})
     void loginOut(View v) {
-        ShareSdkUtils.loginOut(getActivity());
+        switch (v.getId()) {
+            case R.id.loginout://注销账号
+                ShareSdkUtils.loginOut(getActivity());
+                break;
+            case R.id.profile://点击了自己
+                Intent i = new Intent(mContext, ProfileActivity.class);
+                i.putExtra("user", mUser);
+                startActivity(i);
+                break;
+        }
     }
 
 
@@ -75,6 +91,7 @@ public class DrawerFragment extends BaseFragment implements IDrawerFragmentView 
 
     @Override
     public void updateUserInfo(User user) {
+        this.mUser = user;
         FillContent.fillUserInfo(mContext, user, backImage, icon, nickName, attention, fans, sex);
     }
 
