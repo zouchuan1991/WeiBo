@@ -109,6 +109,7 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         if (!ShareSdkUtils.isAuthorize(mContext)) {
+            ToastUtils.showToast(mContext, "还没有进行授权");
             ShareSdkUtils.authorize(mContext);
         }
         mHomeFragment = new HomeFragment();

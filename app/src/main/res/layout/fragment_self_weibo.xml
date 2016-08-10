@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dwg.weibo.ui.fragment.SelfWeiboFragment">
+    tools:context=".ui.fragment.UserWeiboFragment">
 
 
     <android.support.v7.widget.RecyclerView

@@ -6,7 +6,7 @@ import com.dwg.weibo.R;
  * Created by Administrator on 2016/8/8.
  */
 
-public class SelfAlbumFragment extends BaseFragment {
+public class UserAlbumFragment extends BaseFragment {
     @Override
     protected void initParams() {
 

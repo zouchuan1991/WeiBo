@@ -11,9 +11,9 @@ import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.ProfileViewPager;
 import com.dwg.weibo.entity.User;
 import com.dwg.weibo.ui.common.FillContent;
-import com.dwg.weibo.ui.fragment.SelfAlbumFragment;
-import com.dwg.weibo.ui.fragment.SelfWeiboFragment;
+import com.dwg.weibo.ui.fragment.UserAlbumFragment;
 import com.dwg.weibo.ui.fragment.UserInfoFragment;
+import com.dwg.weibo.ui.fragment.UserWeiboFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -55,8 +55,8 @@ public class ProfileActivity extends BaseActivity {
         mUser = getIntent().getParcelableExtra("user");
         FillContent.fillUserInfo(mContext, mUser, backImage, icon, nickName, attention, fans, sex);
         fragments.add(new UserInfoFragment());
-        fragments.add(new SelfWeiboFragment());
-        fragments.add(new SelfAlbumFragment());
+        fragments.add(UserWeiboFragment.newInstance(mUser));
+        fragments.add(new UserAlbumFragment());
         mProfileViewPager = new ProfileViewPager(getSupportFragmentManager(), fragments);
         viewpager.setAdapter(mProfileViewPager);
         tablayout.setTabMode(TabLayout.MODE_FIXED);

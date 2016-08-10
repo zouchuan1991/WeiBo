@@ -26,14 +26,14 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/7/11.
  */
 
-public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class WeiBoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ORINGIN_ITEM = 0;
     private static final int TYPE_RETWEET_ITEM = 1;
     private ArrayList<Status> mDatas;
     private Context mContext;
     private View mView;
 
-    public FragmentHomeAdapter(Context context, ArrayList<Status> mDatas) {
+    public WeiBoAdapter(Context context, ArrayList<Status> mDatas) {
         this.mContext = context;
         this.mDatas = mDatas;
     }

@@ -6,8 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.dwg.weibo.R;
-import com.dwg.weibo.adapter.FragmentHomeAdapter;
 import com.dwg.weibo.adapter.HeaderAndFooterRecyclerAdapter;
+import com.dwg.weibo.adapter.WeiBoAdapter;
 import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.mvp.presenter.IHomeFragmentPresenter;
 import com.dwg.weibo.mvp.presenter.imp.HomeFragmentPresenterImp;
@@ -30,7 +30,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
     MyRecyclerView mRecyclerView;
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    private FragmentHomeAdapter mAdapter;
+    private WeiBoAdapter mAdapter;
     private Context mContext;
     private IHomeFragmentPresenter mHomeFragmentPresenter;
     private ArrayList<Status> mDatas;
@@ -51,7 +51,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
 
     private void initRecyclerView() {
         mDatas = new ArrayList<>();
-        mAdapter = new FragmentHomeAdapter(mContext, mDatas);
+        mAdapter = new WeiBoAdapter(mContext, mDatas);
         mHeaderAndFooterRecyclerAdapter = new HeaderAndFooterRecyclerAdapter(mAdapter);
         linearLayoutManager =
             new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);

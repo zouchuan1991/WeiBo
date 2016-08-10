@@ -1,6 +1,6 @@
 package com.dwg.weibo.mvp.view;
 
-import com.dwg.weibo.entity.Comment;
+import com.dwg.weibo.entity.Status;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/8/9.
  */
 public interface ISelfWeiboFragment {
-    void refreshDatas(ArrayList<Comment> commentList);
+    void refreshDatas(ArrayList<Status> statuses);
 
     void showLoadFooter();
 
