@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -147,6 +148,7 @@ public class FillContent {
     public static void fillWeiBoImgList(Context context, Status status, RecyclerView weibo_images) {
 
         ArrayList<String> imageDatas = status.bmiddle_pic_urls;
+        Log.e("TAG", "图片的数量为" + imageDatas.size());
         if(imageDatas!=null&&imageDatas.size()>0)
         weibo_images.setHasFixedSize(true);
         ImageAdapter imageAdapter = new ImageAdapter(context,imageDatas);

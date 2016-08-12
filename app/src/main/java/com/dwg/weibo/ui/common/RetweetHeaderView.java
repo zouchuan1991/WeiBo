@@ -1,8 +1,6 @@
 package com.dwg.weibo.ui.common;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -78,13 +76,7 @@ public class RetweetHeaderView extends LinearLayout {
         this.mContext = context;
         this.mStatus = status;
         init();
-        Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-            }
-        };
-        handler.sendEmptyMessage(1);
+
     }
 
     private void init() {

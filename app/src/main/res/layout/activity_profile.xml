@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:orientation="vertical"
+<android.support.design.widget.CoordinatorLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include layout="@layout/compose_profile" />
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tablayout"
-        app:tabIndicatorHeight="@dimen/height_3dp"
-        app:tabIndicatorColor="@color/white"
-        app:tabSelectedTextColor="@color/white"
-        app:tabBackground="@color/colorPrimary"
-        app:tabTextColor="@color/black"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_38dp"></android.support.design.widget.TabLayout>
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#123456"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <include
+
+                layout="@layout/compose_profile" />
+        </LinearLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            app:tabIndicatorHeight="@dimen/height_3dp"
+            app:tabIndicatorColor="@color/white"
+            app:tabSelectedTextColor="@color/white"
+            app:tabBackground="@color/colorPrimary"
+            app:tabTextColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_38dp">
+
+        </android.support.design.widget.TabLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- <include layout="@layout/compose_profile" /-->>
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-    </android.support.v4.view.ViewPager>
-</LinearLayout>
-
+</android.support.design.widget.CoordinatorLayout>

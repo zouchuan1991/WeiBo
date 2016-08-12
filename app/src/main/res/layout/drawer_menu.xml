@@ -29,6 +29,7 @@
     <Button
         android:id="@+id/loginout"
         android:text="注销"
+        android:background="@color/red"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
