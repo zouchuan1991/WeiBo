@@ -15,7 +15,6 @@ import com.dwg.weibo.mvp.presenter.IUserActivityPresenter;
 import com.dwg.weibo.mvp.presenter.imp.UserActivityPresenterImp;
 import com.dwg.weibo.mvp.view.ISelfWeiboFragment;
 import com.dwg.weibo.ui.common.FillContentHelper;
-import com.dwg.weibo.utils.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -71,6 +70,8 @@ public class UserWeiboFragment extends BaseFragment implements ISelfWeiboFragmen
 
     @Override
     public void refreshDatas(ArrayList<Status> statuses) {
+
+
         for (Status status : statuses) {
             FillContentHelper.setImgUrl(status);
             if (status.retweeted_status != null) {
@@ -82,7 +83,6 @@ public class UserWeiboFragment extends BaseFragment implements ISelfWeiboFragmen
         mStatus = statuses;
         weiBoAdapter.setDatas(mStatus);
         weiBoAdapter.notifyDataSetChanged();
-        ToastUtils.showToast(mContext, "更新");
         Log.i("Tag", "" + statuses.size());
     }
 
