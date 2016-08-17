@@ -11,4 +11,8 @@ public interface IUserActivityPresenter {
     void firstLoadUserWeiBo(Context context, User user);
 
     void requestMoreUserWeiBo(Context context);
+
+    void firstLoadUserAlbum(Context context, User user);
+
+    void requestMoreUserAlbum(Context context);
 }
