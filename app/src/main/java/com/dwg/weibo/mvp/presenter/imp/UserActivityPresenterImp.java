@@ -10,7 +10,7 @@ import com.dwg.weibo.entity.StatusList;
 import com.dwg.weibo.entity.User;
 import com.dwg.weibo.mvp.model.IUserService;
 import com.dwg.weibo.mvp.presenter.IUserActivityPresenter;
-import com.dwg.weibo.mvp.view.ISelfWeiboFragment;
+import com.dwg.weibo.mvp.view.ISelfFragmentView;
 import com.dwg.weibo.utils.ShareSdkUtils;
 import com.dwg.weibo.utils.ToastUtils;
 
@@ -27,9 +27,9 @@ public class UserActivityPresenterImp implements IUserActivityPresenter {
 
     private Context mContext;
     private ArrayList<Status> mStatus = new ArrayList<>();
-    private ISelfWeiboFragment selfWeiboFragment;
+    private ISelfFragmentView selfWeiboFragment;
 
-    public UserActivityPresenterImp(ISelfWeiboFragment selfWeiboFragment) {
+    public UserActivityPresenterImp(ISelfFragmentView selfWeiboFragment) {
         this.selfWeiboFragment = selfWeiboFragment;
     }
 
@@ -71,6 +71,16 @@ public class UserActivityPresenterImp implements IUserActivityPresenter {
 
     @Override
     public void requestMoreUserWeiBo(Context context) {
+
+    }
+
+    @Override
+    public void firstLoadUserAlbum(Context context, User user) {
+
+    }
+
+    @Override
+    public void requestMoreUserAlbum(Context context) {
 
     }
 

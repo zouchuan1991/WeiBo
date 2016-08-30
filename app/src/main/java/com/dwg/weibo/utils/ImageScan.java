@@ -77,7 +77,7 @@ public abstract class ImageScan {
             if (data.getCount() == 0) {
                 ToastUtils.showToast(mContext, "没有图片");
             } else {
-                ToastUtils.showToast(mContext, "" + data.getCount());
+//                ToastUtils.showToast(mContext, "" + data.getCount());
                 HashMap<String, ArrayList<File>> albumImageListMap = new HashMap<>();//图片目录的hashmap
                 ArrayList<File> albumFolderList = new ArrayList<>();
                 int dataIndex = data.getColumnIndex(MediaStore.Images.Media.DATA);//_data

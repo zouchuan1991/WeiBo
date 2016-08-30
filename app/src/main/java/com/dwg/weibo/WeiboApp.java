@@ -15,6 +15,7 @@ public class WeiboApp extends Application {
 
     @Override
     public void onCreate() {
+
         super.onCreate();
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)

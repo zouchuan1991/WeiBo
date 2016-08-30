@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ViewGroup;
 
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.WeiBoAdapter;
@@ -13,7 +14,7 @@ import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.entity.User;
 import com.dwg.weibo.mvp.presenter.IUserActivityPresenter;
 import com.dwg.weibo.mvp.presenter.imp.UserActivityPresenterImp;
-import com.dwg.weibo.mvp.view.ISelfWeiboFragment;
+import com.dwg.weibo.mvp.view.ISelfFragmentView;
 import com.dwg.weibo.ui.common.FillContentHelper;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 
-public class UserWeiboFragment extends BaseFragment implements ISelfWeiboFragment {
+public class UserWeiboFragment extends BaseFragment implements ISelfFragmentView {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
 
@@ -36,6 +37,8 @@ public class UserWeiboFragment extends BaseFragment implements ISelfWeiboFragmen
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         mUser = bundle.getParcelable("user");
+        ViewGroup viewGroup;
+
     }
 
     @Override

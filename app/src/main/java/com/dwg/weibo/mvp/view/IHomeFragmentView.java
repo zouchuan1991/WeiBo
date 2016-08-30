@@ -24,4 +24,6 @@ public interface IHomeFragmentView {
     void hideRecyclerView();
 
     void showEndFooterView();
+
+    void hideRefreshView();
 }

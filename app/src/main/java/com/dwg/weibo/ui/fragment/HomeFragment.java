@@ -3,6 +3,7 @@ package com.dwg.weibo.ui.fragment;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 
 import com.dwg.weibo.R;
@@ -78,10 +79,9 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         return 0;
     }
 
-
     @Override
     public void updateListView(ArrayList<Status> statuses) {
-        mSwipeRefreshLayout.setRefreshing(false);
+        hideRefreshView();
         int position = mHeaderAndFooterRecyclerAdapter.getItemCount();
         mRecyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
         for(Status status:statuses){
@@ -126,6 +126,11 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
     }
 
     @Override
+    public void hideRefreshView() {
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
     public void hideFooter() {
         RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(),
             LoadingFooterView.State.Normal, null);
@@ -151,6 +156,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragmentView {
         @Override
         public void onRefresh() {
             mHomeFragmentPresenter.firstLoadDatas(mContext);
+            Log.e("TAG", "onRefresh");
         }
     };
 }

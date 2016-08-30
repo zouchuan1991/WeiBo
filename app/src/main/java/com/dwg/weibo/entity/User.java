@@ -27,6 +27,10 @@ import android.os.Parcelable;
  * @since 2013-11-24
  */
 public class User implements Parcelable {
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
     /**
      * 用户UID（int64）

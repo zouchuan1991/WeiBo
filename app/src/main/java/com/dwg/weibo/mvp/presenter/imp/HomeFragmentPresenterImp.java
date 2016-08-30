@@ -106,6 +106,7 @@ public class HomeFragmentPresenterImp implements IHomeFragmentPresenter {
         @Override
         public void noMoreData() {
             ToastUtils.showToast(mContext, "没有更多的数据了");
+            mHomeFragmentView.hideRefreshView();
         }
 
         @Override

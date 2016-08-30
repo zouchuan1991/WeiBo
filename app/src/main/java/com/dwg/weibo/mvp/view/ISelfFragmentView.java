@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/8/9.
  */
-public interface ISelfWeiboFragment {
+public interface ISelfFragmentView {
     void refreshDatas(ArrayList<Status> statuses);
 
     void showLoadFooter();

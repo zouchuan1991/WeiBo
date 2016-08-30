@@ -35,6 +35,7 @@ public interface IUserService {
             @Query("trim_user") int trimUser
     );
 
+
     interface OnDataFinishedListener {
         void noMoreData();
 
