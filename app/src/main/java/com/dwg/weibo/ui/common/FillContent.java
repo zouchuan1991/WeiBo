@@ -147,7 +147,7 @@ public class FillContent {
 
     public static void fillWeiBoImgList(Context context, Status status, RecyclerView weibo_images) {
 
-        ArrayList<String> imageDatas = status.bmiddle_pic_urls;
+        ArrayList<String> imageDatas = status.thumbnail_pic_urls;
         Log.e("TAG", "图片的数量为" + imageDatas.size());
         if(imageDatas!=null&&imageDatas.size()>0)
         weibo_images.setHasFixedSize(true);
@@ -167,7 +167,7 @@ public class FillContent {
         if ( imageDatas!= null) {
             switch (imageDatas.size()) {
                 case 1:
-                    gridLayoutManager = new GridLayoutManager(context, 1);
+                    gridLayoutManager = new GridLayoutManager(context, 2);
                     break;
                 case 2:
                     gridLayoutManager = new GridLayoutManager(context, 2);

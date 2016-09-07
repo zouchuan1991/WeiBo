@@ -4,9 +4,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="关于自己"
+    <RelativeLayout
+        android:padding="@dimen/padding_12dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/at"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:text=" @TA"
+            android:textColor="@color/click_color"
+            android:layout_toLeftOf="@+id/private_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:id="@+id/private_mail"
+            android:textColor="@color/click_color"
+            android:text="私信"
+            android:layout_toLeftOf="@+id/detail_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/detail_info"
+            android:textColor="@color/click_color"
+            android:text="详细资料"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:text="所在地"
+        android:padding="@dimen/padding_12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/address"
+        android:padding="@dimen/padding_12dp"
+        android:text="咸阳"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_1dp"></LinearLayout>
+    <TextView
+        android:text="简介"
+        android:padding="@dimen/padding_12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/introduce"
+        android:padding="@dimen/padding_12dp"
+        android:text="这里应该有介绍"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

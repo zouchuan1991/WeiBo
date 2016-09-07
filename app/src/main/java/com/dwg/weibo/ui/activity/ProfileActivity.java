@@ -19,6 +19,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import de.greenrobot.event.EventBus;
+import github.chenupt.dragtoplayout.DragTopLayout;
 
 /**
  * Created by Administrator on 2016/8/8.
@@ -43,6 +45,8 @@ public class ProfileActivity extends BaseActivity {
     TabLayout tablayout;
     @BindView(R.id.viewpager)
     ViewPager viewpager;
+    @BindView(R.id.drag_layout)
+    DragTopLayout dragLayout;
     private User mUser;
     private Context mContext;
     private ProfileViewPager mProfileViewPager;
@@ -51,12 +55,13 @@ public class ProfileActivity extends BaseActivity {
 
     @Override
     protected void initParams() {
+        EventBus.getDefault().register(this);
         mContext = this;
         mUser = getIntent().getParcelableExtra("user");
         FillContent.fillUserInfo(mContext, mUser, backImage, icon, nickName, attention, fans, sex);
-        fragments.add(new UserInfoFragment());
+        fragments.add(UserInfoFragment.newInstance(mUser));
         fragments.add(UserWeiboFragment.newInstance(mUser));
-        fragments.add(new UserAlbumFragment());
+        fragments.add(UserAlbumFragment.newInstance(mUser));
         mProfileViewPager = new ProfileViewPager(getSupportFragmentManager(), fragments);
         viewpager.setAdapter(mProfileViewPager);
         tablayout.setTabMode(TabLayout.MODE_FIXED);
@@ -71,5 +76,21 @@ public class ProfileActivity extends BaseActivity {
         return R.layout.activity_profile;
     }
 
+    // Handle scroll event from fragments
+    public void onEvent(Boolean b){
+        dragLayout.setTouchMode(b);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
 
 }

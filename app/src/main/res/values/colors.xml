@@ -14,4 +14,5 @@
     <color name="list_item_status_header_profile_time_color">#828282</color>
     <color name="no_access">#b3b3b3</color>
     <color name="click_color">#507daf</color>
+    <color name="divider_color">#babbbc</color>
 </resources>

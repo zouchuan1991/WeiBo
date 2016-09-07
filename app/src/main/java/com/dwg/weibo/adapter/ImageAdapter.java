@@ -41,8 +41,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
         if(this.mDatas.size()==1){
             ViewGroup.LayoutParams params = holder.simple_image.getLayoutParams();
-            params.width = (int) mContext.getResources().getDimension(R.dimen.width_280dp);
-            params.height = (int) mContext.getResources().getDimension(R.dimen.height_280dp);
+            params.width = (int) mContext.getResources().getDimension(R.dimen.width_140dp);
+            params.height = (int) mContext.getResources().getDimension(R.dimen.height_140dp);
         }
         holder.simple_image.setImageURI(Uri.parse(mDatas.get(position)));
     }

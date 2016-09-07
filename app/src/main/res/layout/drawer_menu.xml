@@ -4,33 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/profile"
-        layout="@layout/compose_profile" />
+  <include
+      android:id="@+id/profile"
+      layout="@layout/compose_profile"/>
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_marginLeft="@dimen/margin_15dp" android:layout_marginRight="@dimen/margin_15dp"
+      android:layout_width="match_parent" android:layout_height="match_parent">
+
 
     <TextView
         android:id="@+id/weibo"
         style="@style/drawer_menu"
         android:drawableLeft="@drawable/ic_weibo_grey"
-        android:text="微博" />
+        android:text="微博"/>
+    <include
+        layout="@layout/divider_line">
 
+    </include>
     <TextView
         android:id="@+id/notification"
         style="@style/drawer_menu"
         android:drawableLeft="@drawable/ic_notification_gray_24"
-        android:text="通知" />
-
+        android:text="通知"/>
+    <include
+        layout="@layout/divider_line"/>
     <TextView
         android:id="@+id/private_message"
         style="@style/drawer_menu"
         android:drawableLeft="@drawable/ic_email_grey600_24dp"
-        android:text="私信" />
-
+        android:text="私信"/>
+    <include
+        layout="@layout/divider_line"/>
     <Button
         android:id="@+id/loginout"
-        android:text="注销"
-        android:background="@color/red"
+        android:text="退出账号"
+        android:textColor="@color/red"
+        android:background="@color/white"
+
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
+    <include
+        layout="@layout/divider_line"/>
+  </LinearLayout>
 </LinearLayout>

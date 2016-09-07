@@ -3,6 +3,7 @@ package com.dwg.weibo.ui.fragment;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
@@ -16,7 +17,7 @@ import com.dwg.weibo.mvp.view.IHomeFragmentView;
 import com.dwg.weibo.ui.common.FillContentHelper;
 import com.dwg.weibo.ui.common.LoadingFooterView;
 import com.dwg.weibo.utils.RecyclerViewStateUtils;
-import com.dwg.weibo.widget.EndlessRecyclerOnScrollListener;
+import com.dwg.weibo.widget.*;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ import butterknife.BindView;
 
 public class HomeFragment extends BaseFragment implements IHomeFragmentView {
     @BindView(R.id.fragment_home_content)
-    MyRecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     private WeiBoAdapter mAdapter;

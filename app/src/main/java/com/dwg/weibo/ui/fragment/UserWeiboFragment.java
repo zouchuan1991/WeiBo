@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewGroup;
-
 import com.dwg.weibo.R;
 import com.dwg.weibo.adapter.WeiBoAdapter;
 import com.dwg.weibo.entity.Status;
@@ -16,15 +15,18 @@ import com.dwg.weibo.mvp.presenter.IUserActivityPresenter;
 import com.dwg.weibo.mvp.presenter.imp.UserActivityPresenterImp;
 import com.dwg.weibo.mvp.view.ISelfFragmentView;
 import com.dwg.weibo.ui.common.FillContentHelper;
-
+import com.dwg.weibo.widget.*;
 import java.util.ArrayList;
-
 import butterknife.BindView;
+import de.greenrobot.event.EventBus;
+import github.chenupt.dragtoplayout.AttachUtil;
 
 
 public class UserWeiboFragment extends BaseFragment implements ISelfFragmentView {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
+
+
 
     private Context mContext;
     private IUserActivityPresenter mUserActivityPresenter;
@@ -50,7 +52,22 @@ public class UserWeiboFragment extends BaseFragment implements ISelfFragmentView
         recyclerView.setAdapter(weiBoAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
         updateDatas();
+
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                EventBus.getDefault().post(AttachUtil.isRecyclerViewAttach(recyclerView));
+                Log.e("111",">>>.");
+            }
+        });
     }
+
+
 
     public static UserWeiboFragment newInstance(User user) {
 

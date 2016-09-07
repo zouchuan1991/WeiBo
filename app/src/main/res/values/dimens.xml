@@ -141,6 +141,10 @@
     <dimen name="height_180dp">180dp</dimen>
     <dimen name="width_3dp">3dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="width_140dp">140dp</dimen>
+    <dimen name="height_140dp">140dp</dimen>
 
 
 </resources>

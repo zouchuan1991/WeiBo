@@ -104,22 +104,25 @@ public class HandleAcitivity extends BaseActivity implements ImageListAdapter.On
         switch (mPostType) {
             case PostService.POST_COMMNET_WEIBO:
                 inputType.setText(R.string.post_comment_weibo);
+                repostLayout.setVisibility(View.GONE);
                 break;
             case PostService.POST_CREATE_WEIBO:
                 inputType.setText(R.string.post_create_weibo);
+                repostLayout.setVisibility(View.GONE);
                 break;
             case PostService.POST_REPLY_WEIBO:
                 inputType.setText(R.string.post_reply_weibo);
                 break;
             case PostService.POST_REPOST_WEIBO:
                 inputType.setText(R.string.post_repost_weibo);
+                repostLayout.setVisibility(View.VISIBLE);
                 repostWeibo();
                 break;
         }
     }
 
     private void repostWeibo() {
-        repostLayout.setVisibility(View.VISIBLE);
+
         if (mStatus.retweeted_status != null) {
             content.setText("//@" + mStatus.retweeted_status.text);
             FillContent.fillRepostOriginContent(mContext, mStatus.retweeted_status, repostImg, repostName, repostContent);

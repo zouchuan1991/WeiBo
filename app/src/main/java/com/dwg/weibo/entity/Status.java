@@ -19,9 +19,17 @@ package com.dwg.weibo.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.v4.util.ArrayMap;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * 微博结构体。
@@ -30,6 +38,7 @@ import java.util.ArrayList;
  * @since 2013-11-22
  */
 public class Status implements Parcelable {
+
 
     /**
      * 微博创建时间

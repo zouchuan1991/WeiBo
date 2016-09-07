@@ -24,7 +24,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/height_50dp</item>
         <item name="android:drawablePadding">@dimen/padding_40dp</item>
-        <item name="android:paddingLeft">@dimen/padding_15dp</item>
+
     </style>
 
 </resources>

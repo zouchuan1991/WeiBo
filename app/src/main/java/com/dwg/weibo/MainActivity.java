@@ -3,6 +3,7 @@ package com.dwg.weibo;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -47,7 +48,8 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
     DrawerLayout mDrawerLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
+    @BindView(R.id.fab)
+    FloatingActionButton actionButton;
     private FragmentManager mFragmentManager;
     private Context mContext;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -68,7 +70,14 @@ public class MainActivity extends BaseActivity implements PlatformActionListener
                 i.putExtra("POST_TYPE", PostService.POST_CREATE_WEIBO);
                 startActivity(i);
                 break;
+
         }
+    }
+    @OnClick(R.id.fab)
+    public void onFabClick(View view){
+        Intent i = new Intent(mContext,HandleAcitivity.class);
+        i.putExtra("POST_TYPE",PostService.POST_CREATE_WEIBO);
+        startActivity(i);
     }
 
 
