@@ -51,7 +51,7 @@
         android:layout_marginRight="12dp"
         android:gravity="center"
         android:text="发送"
-        android:textColor="#b3b3b3"
+        android:textColor="@color/red"
         android:textSize="16sp" />
 
     <ImageView

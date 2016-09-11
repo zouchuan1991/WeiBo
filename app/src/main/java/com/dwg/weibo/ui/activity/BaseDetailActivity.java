@@ -17,6 +17,7 @@ import com.dwg.weibo.entity.Status;
 import com.dwg.weibo.mvp.presenter.IStatusDetailPresenter;
 import com.dwg.weibo.mvp.presenter.imp.StatusDetailPresenterImp;
 import com.dwg.weibo.mvp.view.IBaseActivityView;
+import com.dwg.weibo.ui.common.FillContent;
 import com.dwg.weibo.ui.common.LoadingFooterView;
 import com.dwg.weibo.utils.RecyclerViewStateUtils;
 import com.dwg.weibo.widget.EndlessRecyclerOnScrollListener;
@@ -59,7 +60,7 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
     mStatusDetailPresenter.pullToRefreshComment(mContext);
     initSwipeRefresh();
     initRecyclerView();
-
+    FillContent.fillButtonBar(mContext,mStatus,mLinearComment,mLineartransmit,mLinearFavour);
   }
 
   private void initRecyclerView() {
@@ -78,7 +79,7 @@ public abstract class BaseDetailActivity extends BaseActivity implements IBaseAc
   private void initSwipeRefresh() {
     mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override public void onRefresh() {
-
+        mSwipeRefreshLayout.setRefreshing(false);
       }
     });
   }

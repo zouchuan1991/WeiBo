@@ -78,8 +78,10 @@ public class CommentFragmentPresenterImp implements ICommentFragmentPresenter {
         model.enqueue(new Callback<CommentList>() {
             @Override
             public void onResponse(Call<CommentList> call, Response<CommentList> response) {
+                Log.e("TAG","请求更多的数据");
                 if (response.body().comments.size() != 0) {
                     if (response.body().comments.size() >= 2) {
+                        Log.e("body size",response.body().comments.size()+"");
                         response.body().comments.remove(0);
                         mCommentList.comments.addAll(response.body().comments);
                     } else {

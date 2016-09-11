@@ -93,7 +93,7 @@ public class RetweetHeaderView extends LinearLayout {
         FillContent.fillWeiBoContent(mContext, originContext, mStatus.text);
         FillContent.fillFloatBar(mContext, mStatus, commentBarComment, commentBarRetweet,
                 commentBarLike);
-        FillContent.fillWeiBoImgList(mContext, mStatus, weiboImages);
+        FillContent.fillWeiBoImgList(mContext, mStatus.retweeted_status, weiboImages);
 
     }
 }

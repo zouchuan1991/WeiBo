@@ -1,12 +1,17 @@
 package com.dwg.weibo.adapter;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import com.dwg.weibo.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -34,6 +39,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         View view = LayoutInflater.from(mContext).inflate(R.layout.image,parent,false);
         viewHolder = new ViewHolder(view);
         return viewHolder;
+
+
+
     }
 
     @Override
